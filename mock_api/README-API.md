@@ -27,6 +27,22 @@ The API will be available at: `http://localhost:5000`
 
 ## 📡 Endpoints
 
+
+
+| Method | Endpoint             | Description                          |
+|--------|----------------------|--------------------------------------|
+| POST   | `/inmates`           | Create a new inmate booking          |
+| GET    | `/inmates`           | Get a list of all inmate bookings    |
+| GET    | `/inmates/<id>`      | Get a specific inmate by ID          |
+| PUT    | `/inmates/<id>`      | Update an existing inmate booking    |
+| DELETE | `/inmates/<id>`      | Delete an inmate booking             |
+
+
+
+---
+
+
+
 ### 1. Create New Inmate Booking
 - **POST** `/inmates`
 - **Request Body**:
@@ -103,29 +119,6 @@ All errors return JSON in this format:
   "message": "No inmate found with ID 'xyz'"
 }
 ```
-
-
----
-
-## 🧾 Requirements.txt
-
-```
-Flask==2.3.2
-```
-
----
-
-## 📄 data_store.py
-
-```python
-# data_store.py
-
-inmates_db = {}
-```
-
----
-
-## 🐍 app.py
 
 
 ---
