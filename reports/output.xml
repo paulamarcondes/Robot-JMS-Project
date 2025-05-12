@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-11T23:28:05.106975" rpa="false" schemaversion="5">
+<suite id="s1" name="3.Server Tests" source="C:\Projects\RobotJMSProject\tests\3.server_tests.robot">
+<kw name="Create Session On Mock Server" owner="keywords" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-05-11T23:28:05.688802" level="INFO">Creating Session using : alias=jail_mock_api, url=http://localhost:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>jail_mock_api</arg>
+<arg>http://localhost:5000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-05-11T23:28:05.688691" elapsed="0.000266"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-11T23:28:05.689124" level="INFO">Session Created Successfully On Mock Server.</msg>
+<arg>Session Created Successfully On Mock Server.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-11T23:28:05.689056" elapsed="0.000096"/>
+</kw>
+<status status="PASS" start="2025-05-11T23:28:05.688119" elapsed="0.001075"/>
+</kw>
+<test id="s1-t1" name="3.1 Handle RMS Unavailability Properly" line="13">
+<kw name="Generate Random Booking Data" owner="keywords">
+<kw name="Name" owner="FakerLibrary">
+<msg time="2025-05-11T23:28:05.690128" level="INFO">${random_name} = Sophia Wilson</msg>
+<var>${random_name}</var>
+<doc>:example: 'John Doe'</doc>
+<status status="PASS" start="2025-05-11T23:28:05.689837" elapsed="0.000380"/>
+</kw>
+<kw name="Date" owner="FakerLibrary">
+<msg time="2025-05-11T23:28:05.690510" level="INFO">${random_date} = 1975-10-27</msg>
+<var>${random_date}</var>
+<arg>pattern='%Y-%m-%d'</arg>
+<doc>Get a date string between January 1, 1970 and now.</doc>
+<status status="PASS" start="2025-05-11T23:28:05.690308" elapsed="0.000222"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-11T23:28:05.690897" level="INFO">${random_facility} = Crestview Labs</msg>
+<var>${random_facility}</var>
+<arg>${FACILITIES}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-11T23:28:05.690596" elapsed="0.000318"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-11T23:28:05.691156" level="INFO">${random_crime} = Theft</msg>
+<var>${random_crime}</var>
+<arg>${CRIME_TYPES}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-11T23:28:05.690978" elapsed="0.000196"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-05-11T23:28:05.691383" level="INFO">${random_priority} = Medium</msg>
+<var>${random_priority}</var>
+<arg>${PRIORITY}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-05-11T23:28:05.691238" elapsed="0.000160"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-11T23:28:05.691746" level="INFO">&amp;{random_booking} = { name=Sophia Wilson | bookingDate=1975-10-27 | facility=Crestview Labs | crimeType=Theft | priority=Medium }</msg>
+<var>&amp;{random_booking}</var>
+<arg>name=${random_name}</arg>
+<arg>bookingDate=${random_date}</arg>
+<arg>facility=${random_facility}</arg>
+<arg>crimeType=${random_crime}</arg>
+<arg>priority=${random_priority}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-11T23:28:05.691468" elapsed="0.000296"/>
+</kw>
+<kw name="Log Dictionary" owner="Collections">
+<msg time="2025-05-11T23:28:05.691907" level="INFO">Dictionary size is 5 and it contains following items:
+bookingDate: 1975-10-27
+crimeType: Theft
+facility: Crestview Labs
+name: Sophia Wilson
+priority: Medium</msg>
+<arg>${random_booking}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<status status="PASS" start="2025-05-11T23:28:05.691829" elapsed="0.000103"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-05-11T23:28:05.692100" level="INFO">${random_booking} = {'name': 'Sophia Wilson', 'bookingDate': '1975-10-27', 'facility': 'Crestview Labs', 'crimeType': 'Theft', 'priority': 'Medium'}</msg>
+<arg>${random_booking}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-05-11T23:28:05.691994" elapsed="0.000135"/>
+</kw>
+<status status="PASS" start="2025-05-11T23:28:05.689682" elapsed="0.002483"/>
+</kw>
+<kw name="Send Booking Request And Verify Error" owner="keywords">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-05-11T23:28:09.771982" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B6E4980&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:14.023700" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B61FB10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:18.490065" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B61FD90&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:22.553183" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7009D0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</msg>
+<arg>jail_mock_api</arg>
+<arg>/inmates</arg>
+<arg>json=${random_booking}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-05-11T23:28:05.692538" elapsed="16.869335">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7009D0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<msg time="2025-05-11T23:28:22.562040" level="INFO">${response} = None</msg>
+<var>${response}</var>
+<arg>POST On Session</arg>
+<arg>jail_mock_api</arg>
+<arg>/inmates</arg>
+<arg>json=${random_booking}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2025-05-11T23:28:05.692456" elapsed="16.869614">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7009D0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-11T23:28:22.562625" level="INFO">Server unreachable during booking attempt</msg>
+<arg>Server unreachable during booking attempt</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-11T23:28:22.562518" elapsed="0.000154"/>
+</kw>
+<arg>'${response}' != 'None'</arg>
+<arg>Log</arg>
+<arg>Server responded to booking attempt: ${response.text}</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Server unreachable during booking attempt</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-11T23:28:22.562234" elapsed="0.000648"/>
+</kw>
+<status status="FAIL" start="2025-05-11T23:28:05.692318" elapsed="16.870694">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7009D0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<kw name="Confirm If Booking Was Saved Or Log Server Down" owner="keywords">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-05-11T23:28:26.628365" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B57BE10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:30.899695" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B53BD10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:35.378107" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7B0050&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:39.514989" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7B0490&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</msg>
+<arg>jail_mock_api</arg>
+<arg>/inmates</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-05-11T23:28:22.566970" elapsed="16.954159">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7B0490&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<msg time="2025-05-11T23:28:39.521316" level="INFO">${response} = None</msg>
+<var>${response}</var>
+<arg>GET On Session</arg>
+<arg>jail_mock_api</arg>
+<arg>/inmates</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2025-05-11T23:28:22.566881" elapsed="16.954469">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7B0490&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-11T23:28:39.522048" level="INFO">Server still unreachable. Cannot confirm if booking was saved.</msg>
+<arg>Server still unreachable. Cannot confirm if booking was saved.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-11T23:28:39.521931" elapsed="0.000184"/>
+</kw>
+<arg>'${response}' != 'None'</arg>
+<arg>Validate Booking Saved</arg>
+<arg>${response}</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Server still unreachable. Cannot confirm if booking was saved.</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-11T23:28:39.521555" elapsed="0.000614"/>
+</kw>
+<status status="FAIL" start="2025-05-11T23:28:22.566698" elapsed="16.955607">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7B0490&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<doc>Important: This Test expects server to be down!</doc>
+<status status="FAIL" start="2025-05-11T23:28:05.689231" elapsed="33.834022">Several failures occurred:
+
+1) ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7009D0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))
+
+2) ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /inmates (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7B0490&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</test>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2025-05-11T23:28:39.524834" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-05-11T23:28:39.524733" elapsed="0.000184"/>
+</kw>
+<doc>This file contains the test cases for the present mini-project.</doc>
+<status status="FAIL" start="2025-05-11T23:28:05.107986" elapsed="34.416972"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="3.Server Tests" id="s1" pass="0" fail="1" skip="0">3.Server Tests</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-05-11T23:28:09.771982" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B6E4980&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:14.023700" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B61FB10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:18.490065" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B61FD90&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:26.628365" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B57BE10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:30.899695" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B53BD10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+<msg time="2025-05-11T23:28:35.378107" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001F24B7B0050&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /inmates</msg>
+</errors>
+</robot>
