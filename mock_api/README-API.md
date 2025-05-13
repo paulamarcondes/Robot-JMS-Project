@@ -111,14 +111,28 @@ The API will be available at: `http://localhost:5000`
 
 ## 🚨 Error Responses
 
-All errors return JSON in this format:
+ All errors return JSON in this format:
+
+ ```json
+ {
+   "error": "Resource not found",
+   "message": "No inmate found with ID 'xyz'"
+ }
+ ```
 
 ```json
 {
-  "error": "Resource not found",
-  "message": "No inmate found with ID 'xyz'"
+  "error": "Internal server error",
+  "message": "An unexpected error occurred"
 }
 ```
+
+
+The following HTTP status codes may be returned:
+
+- `400 Bad Request`: Missing or invalid request data
+- `404 Not Found`: Inmate with specified ID does not exist
+- `500 Internal Server Error`: An unexpected server-side error occurred
 
 
 ---
