@@ -59,7 +59,7 @@ def delete_inmate(id):
         if id not in inmates_db:
             return jsonify(error="Not found"), 404
         del inmates_db[id]
-        return '', 204
+        return jsonify(message="Inmate deleted successfully"), 200
     except Exception as e:
         return handle_exception(e)
 

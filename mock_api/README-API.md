@@ -1,8 +1,7 @@
 ## Jail System Mock API
 
-This is a simple Flask-based mock server that simulates a Jail Management System interface for inmate bookings. 
+This is a simple Flask-based mock server that simulates a Jail Management System interface for inmate bookings.  
 It supports basic CRUD operations and is intended for use in QA testing, especially with tools like **Robot Framework**.
-
 
 ---
 
@@ -22,12 +21,9 @@ python app.py
 
 The API will be available at: `http://localhost:5000`
 
-
 ---
 
 ## 📡 Endpoints
-
-
 
 | Method | Endpoint             | Description                          |
 |--------|----------------------|--------------------------------------|
@@ -37,11 +33,7 @@ The API will be available at: `http://localhost:5000`
 | PUT    | `/inmates/<id>`      | Update an existing inmate booking    |
 | DELETE | `/inmates/<id>`      | Delete an inmate booking             |
 
-
-
 ---
-
-
 
 ### 1. Create New Inmate Booking
 - **POST** `/inmates`
@@ -55,24 +47,26 @@ The API will be available at: `http://localhost:5000`
   "priority": "Medium"
 }
 ```
-- **Success Response**: `201 Created` with full inmate record including generated `id`.
-
+- **Success Response**: Full inmate object including generated `id` (`201 Created`)
+- **Failure**:
+  - Missing required field (`400 Bad Request`)
+  - Unexpected error (`500 Internal Server Error`)
 
 ---
 
 ### 2. Get All Inmates
 - **GET** `/inmates`
-- **Response**: Array of all stored inmates.
-- **Status Code**: `200 OK`
-
+- **Success Response**: List of all inmates (`200 OK`)
+- **Failure**: Unexpected error (`500 Internal Server Error`)
 
 ---
 
 ### 3. Get Single Inmate by ID
 - **GET** `/inmates/<id>`
-- **Path Parameter**: `<id>` – UUID string
-- **Response**: Single inmate object or `404 Not Found`
-
+- **Success Response**: Inmate object (`200 OK`)
+- **Failure**:
+  - Inmate not found (`404 Not Found`)
+  - Unexpected error (`500 Internal Server Error`)
 
 ---
 
@@ -80,16 +74,18 @@ The API will be available at: `http://localhost:5000`
 - **PUT** `/inmates/<id>`
 - **Request Body**: Any combination of fields from POST
 - **Success Response**: Updated inmate object (`200 OK`)
-- **Failure**: `404 Not Found` if ID does not exist
-
+- **Failure**:
+  - Inmate not found (`404 Not Found`)
+  - Unexpected error (`500 Internal Server Error`)
 
 ---
 
 ### 5. Delete Inmate Booking
 - **DELETE** `/inmates/<id>`
-- **Success Response**: `204 No Content`
-- **Failure**: `404 Not Found`
-
+- **Success Response**: Success message (`200 OK`)
+- **Failure**:
+  - Inmate not found (`404 Not Found`)
+  - Unexpected error (`500 Internal Server Error`)
 
 ---
 
@@ -106,19 +102,18 @@ The API will be available at: `http://localhost:5000`
 }
 ```
 
-
 ---
 
 ## 🚨 Error Responses
 
- All errors return JSON in this format:
+All errors return JSON in this format:
 
- ```json
- {
-   "error": "Resource not found",
-   "message": "No inmate found with ID 'xyz'"
- }
- ```
+```json
+{
+  "error": "Resource not found",
+  "message": "No inmate found with ID 'xyz'"
+}
+```
 
 ```json
 {
@@ -127,12 +122,16 @@ The API will be available at: `http://localhost:5000`
 }
 ```
 
+---
 
-The following HTTP status codes may be returned:
+## 🚨 HTTP Status Codes Summary
 
-- `400 Bad Request`: Missing or invalid request data
-- `404 Not Found`: Inmate with specified ID does not exist
-- `500 Internal Server Error`: An unexpected server-side error occurred
-
+| Status Code             | Meaning                                      |
+|-------------------------|----------------------------------------------|
+| `200 OK`                | General success (GET, PUT, DELETE)           |
+| `201 Created`           | Inmate successfully created                  |
+| `400 Bad Request`       | Missing or invalid request data              |
+| `404 Not Found`         | Inmate with specified ID does not exist      |
+| `500 Internal Server Error` | An unexpected server-side error occurred |
 
 ---

@@ -35,16 +35,16 @@ Generate Random Booking Data
     Set Suite Variable    ${random_booking}
 
 Send Valid Booking Request
-    ${booking}=    POST On Session    jail_mock_api    /inmates    json=${random_booking}    
-    Log    Status Code: ${booking.status_code}
-    Log    Response Body: ${booking.json()}
-    ${booking_body}=    Set Variable    ${booking.json()}
-    Set Suite Variable    ${booking}
-    Set Suite Variable    ${booking_body}
+    ${response}=    POST On Session    jail_mock_api    /inmates    json=${random_booking}    
+    Log    Status Code: ${response.status_code}
+    Log    Response Body: ${response.json()}
+    ${response_body}=    Set Variable    ${response.json()}
+    Set Suite Variable    ${response}
+    Set Suite Variable    ${response_body}
 
-Validade POST Successful Response
-    Should Be Equal As Integers    ${booking.status_code}    201
-    Should Contain    ${booking.json()}    id
+Validate POST Successful Response
+    Should Be Equal As Integers    ${response.status_code}    201
+    Should Contain    ${response.json()}    id
     Log    Validation Completed.
 
 List All Inmate Bookings
@@ -60,14 +60,14 @@ Choose Random Inmate Booking
     Log    Chosen Inmate Booking ID: ${chosen_booking}
     Set Test Variable    ${chosen_booking}
 
-Validate Return Of Correct Data
+Validate GET Successful Response
     ${response}=    GET On Session    jail_mock_api    /inmates/${chosen_booking}
+    Should Be Equal As Integers    ${response.status_code}    200
     Should Contain    ${response.json()}    name
-    Should Contain    ${response.json()}    facility
     Log    Inmate Information: ${response.json()}
 
-Retreive Booking ID From Request
-    ${booking_id}=    Get From Dictionary    ${booking_body}    id
+Retrieve Booking ID From Request
+    ${booking_id}=    Get From Dictionary    ${response_body}    id
     Log    Booking Record ID: ${booking_id}
     Set Test Variable    ${booking_id}
 
@@ -77,33 +77,50 @@ Compare Booking Record With RMS
     Should Contain    ${response.text}    ${booking_id}
     Log    Booking ID ${booking_id} found in response: ${response.json()}
 
+Validate POST All Fields Response
+    Should Contain    ${response.json()}    
+    ...    name    
+    ...    bookingDate    
+    ...    facility    
+    ...    crimeType    
+    ...    priority    
+    ...    id
+    Log    All Required Fields Validated Successfully
+
+Delete Inmate Booking
+    ${response}=    DELETE On Session    jail_mock_api    /inmates/${chosen_booking}
+    Should Be Equal As Integers    ${response.status_code}    204
+    Log    Deletion Of Random Booking Completed
+
+
+
 
 
 
 
 ### --- Negative Tests Keywords --- ###
-Book Request Without Required Details
+Send Invalid Booking Request
     Remove From Dictionary    ${random_booking}    name
     Log    ${random_booking}
     ${response}=    Run Keyword And Expect Error    HTTPError: 400 Client Error: BAD REQUEST*
     ...    POST On Session    jail_mock_api    /inmates    json=${random_booking}
     Set Suite Variable    ${response}
 
-Verify 400 Error Response
+Validate POST Error Response
     Should Contain    ${response}    400
     Should Contain    ${response}    BAD REQUEST
-    Log    Error Response Verification Completed.
+    Log    POST Error Response Validation Completed
 
 Choose Random Inmate Name
     ${inmates}=    Evaluate    [booking["name"] for booking in ${body}]
     Log    Available Inmate Names: ${inmates}
-    ${chosen_name}=    Random Element    ${inmates}
-    Log    Chosen Inmate Name: ${chosen_name}
-    Set Test Variable    ${chosen_name}
+    ${chosen_inmate}=    Random Element    ${inmates}
+    Log    Chosen Inmate Name: ${chosen_inmate}
+    Set Test Variable    ${chosen_inmate}
 
-Try New Booking With Same Name
+Post New Booking With Same Name
     &{duplicate_inmate}=    Create Dictionary    
-    ...    name=${chosen_name}    
+    ...    name=${chosen_inmate}    
     ...    bookingDate=2024-04-05    
     ...    facility= County Jail A    
     ...    crimeType= Misdemeanor    
@@ -111,8 +128,25 @@ Try New Booking With Same Name
     Log    Booking with Duplicate Name: ${duplicate_inmate}
 
     ${response}=    POST On Session    jail_mock_api    /inmates    json=${duplicate_inmate}
-    Log    Attempt Booking With Same Name Response: ${response.status_code}
-    Log    Attempt Booking With Same Name Response: ${response.reason}
+    Log    New Booking With Same Name Successful: ${response.json()}
+
+Generate Invalid ID Number
+    ${invalid_id}=    Random Number    digits=10
+    Log    Invalid ID number: ${invalid_id}
+    Set Test Variable    ${invalid_id}
+
+Get Inmate By Invalid ID
+    ${response}=    Run Keyword And Expect Error    HTTPError: 404 Client Error: NOT FOUND*
+    ...    GET On Session    jail_mock_api    /inmates/${invalid_id}
+    Log    Expected Error: ${response}
+    Set Test Variable    ${response}
+
+Validate GET Error Response
+    Should Contain    ${response}    404
+    Should Contain    ${response}    NOT FOUND
+    Log    GET Error Response Validation Completed
+
+
 
 
 
@@ -135,7 +169,7 @@ Confirm If Booking Was Saved Or Log Server Down
     Run Keyword If    '${response}' != 'None'
     ...    Validate Booking Saved    ${response}
     ...    ELSE
-    ...    Log    Server still unreachable. Cannot confirm if booking was saved.
+    ...    Log    Server unreachable, cannot confirm if booking was saved
 
 Validate Booking Saved
     [Arguments]    ${response}
