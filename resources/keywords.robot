@@ -129,6 +129,7 @@ Post New Booking With Same Name
 
     ${response}=    POST On Session    jail_mock_api    /inmates    json=${duplicate_inmate}
     Log    New Booking With Same Name Successful: ${response.json()}
+    Set Test Variable    ${response}
 
 Generate Invalid ID Number
     ${invalid_id}=    Random Number    digits=10
