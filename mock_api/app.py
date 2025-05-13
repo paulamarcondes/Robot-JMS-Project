@@ -6,62 +6,58 @@ import uuid
 
 app = Flask(__name__)
 
+REQUIRED_FIELDS = ['name', 'bookingDate', 'facility', 'crimeType', 'priority']
+
 @app.errorhandler(Exception)
 def handle_exception(e):
     app.logger.error(f"Server error: {e}")
     return jsonify(error="Internal server error"), 500
 
+def validate_fields(data):
+    missing = [field for field in REQUIRED_FIELDS if field not in data]
+    if missing:
+        return jsonify(error=f"Missing required fields: {', '.join(missing)}"), 400
+    return None
+
 @app.route('/inmates', methods=['POST'])
 def create_inmate():
-    try:
-        data = request.get_json()
-        required = ['name', 'bookingDate', 'facility', 'crimeType', 'priority']
-        if not all(f in data for f in required):
-            return jsonify(error="Missing required field"), 400
+    data = request.get_json()
+    error = validate_fields(data)
+    if error:
+        return error
 
-        iid = str(uuid.uuid4())
-        inmate = {'id': iid, **data}
-        inmates_db[iid] = inmate
-        return jsonify(inmate), 201
-    except Exception as e:
-        return handle_exception(e)
+    iid = str(uuid.uuid4())
+    inmate = {'id': iid, **data}
+    inmates_db[iid] = inmate
+    return jsonify(inmate), 201
 
 @app.route('/inmates', methods=['GET'])
 def get_all_inmates():
-    try:
-        return jsonify(list(inmates_db.values()))
-    except Exception as e:
-        return handle_exception(e)
+    return jsonify(list(inmates_db.values())), 200
 
 @app.route('/inmates/<id>', methods=['GET'])
 def get_inmate(id):
-    try:
-        inmate = inmates_db.get(id)
-        return jsonify(inmate) if inmate else jsonify(error="Not found"), 404
-    except Exception as e:
-        return handle_exception(e)
+    inmate = inmates_db.get(id)
+    if not inmate:
+        return jsonify(error="Not found"), 404
+    return jsonify(inmate), 200
 
 @app.route('/inmates/<id>', methods=['PUT'])
 def update_inmate(id):
-    try:
-        if id not in inmates_db:
-            return jsonify(error="Not found"), 404
-        data = request.get_json()
-        updated = {**inmates_db[id], **data}
-        inmates_db[id] = updated
-        return jsonify(updated)
-    except Exception as e:
-        return handle_exception(e)
+    if id not in inmates_db:
+        return jsonify(error="Not found"), 404
+
+    data = request.get_json()
+    inmates_db[id].update(data)
+    return jsonify(inmates_db[id]), 200
 
 @app.route('/inmates/<id>', methods=['DELETE'])
 def delete_inmate(id):
-    try:
-        if id not in inmates_db:
-            return jsonify(error="Not found"), 404
-        del inmates_db[id]
-        return jsonify(message="Inmate deleted successfully"), 200
-    except Exception as e:
-        return handle_exception(e)
+    if id not in inmates_db:
+        return jsonify(error="Not found"), 404
+
+    del inmates_db[id]
+    return '', 204  # No Content
 
 if __name__ == '__main__':
     app.run(debug=False)

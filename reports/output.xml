@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-12T23:09:15.817956" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-12T23:28:26.983771" rpa="false" schemaversion="5">
 <suite id="s1" name="1.Positive Tests" source="C:\Projects\RobotJMSProject\tests\1.positive_tests.robot">
 <kw name="Create Session On Mock Server" owner="keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:16.560090" level="INFO">Creating Session using : alias=jail_mock_api, url=http://localhost:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2025-05-12T23:28:27.683909" level="INFO">Creating Session using : alias=jail_mock_api, url=http://localhost:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>jail_mock_api</arg>
 <arg>http://localhost:5000</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-05-12T23:09:16.559804" elapsed="0.000612"/>
+<status status="PASS" start="2025-05-12T23:28:27.683631" elapsed="0.000593"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:16.560881" level="INFO">Session Created Successfully On Mock Server.</msg>
+<msg time="2025-05-12T23:28:27.684496" level="INFO">Session Created Successfully On Mock Server.</msg>
 <arg>Session Created Successfully On Mock Server.</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.560607" elapsed="0.000324"/>
+<status status="PASS" start="2025-05-12T23:28:27.684378" elapsed="0.000165"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:16.558575" elapsed="0.002424"/>
+<status status="PASS" start="2025-05-12T23:28:27.682981" elapsed="0.001628"/>
 </kw>
 <test id="s1-t1" name="1.1 Validate Successful Booking Response" line="13">
 <kw name="Generate Random Booking Data" owner="keywords">
 <kw name="Name" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:16.562355" level="INFO">${random_name} = Joyce Williams</msg>
+<msg time="2025-05-12T23:28:27.685739" level="INFO">${random_name} = Anita Robinson</msg>
 <var>${random_name}</var>
 <doc>:example: 'John Doe'</doc>
-<status status="PASS" start="2025-05-12T23:09:16.561851" elapsed="0.000531"/>
+<status status="PASS" start="2025-05-12T23:28:27.685348" elapsed="0.000413"/>
 </kw>
 <kw name="Date" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:16.564743" level="INFO">${random_date} = 1983-09-19</msg>
+<msg time="2025-05-12T23:28:27.686048" level="INFO">${random_date} = 1988-08-07</msg>
 <var>${random_date}</var>
 <arg>pattern='%Y-%m-%d'</arg>
 <doc>Get a date string between January 1, 1970 and now.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.562477" elapsed="0.002329"/>
+<status status="PASS" start="2025-05-12T23:28:27.685839" elapsed="0.000228"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:16.565790" level="INFO">${random_facility} = Crestview Labs</msg>
+<msg time="2025-05-12T23:28:27.686465" level="INFO">${random_facility} = Summit Center</msg>
 <var>${random_facility}</var>
 <arg>${FACILITIES}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.565085" elapsed="0.000743"/>
+<status status="PASS" start="2025-05-12T23:28:27.686141" elapsed="0.000344"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:16.566346" level="INFO">${random_crime} = Assault</msg>
+<msg time="2025-05-12T23:28:27.686752" level="INFO">${random_crime} = Misdemeanor</msg>
 <var>${random_crime}</var>
 <arg>${CRIME_TYPES}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.565998" elapsed="0.000373"/>
+<status status="PASS" start="2025-05-12T23:28:27.686559" elapsed="0.000213"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:16.566792" level="INFO">${random_priority} = Routine</msg>
+<msg time="2025-05-12T23:28:27.687061" level="INFO">${random_priority} = Urgent</msg>
 <var>${random_priority}</var>
 <arg>${PRIORITY}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.566485" elapsed="0.000337"/>
+<status status="PASS" start="2025-05-12T23:28:27.686849" elapsed="0.000231"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-12T23:09:16.567437" level="INFO">&amp;{random_booking} = { name=Joyce Williams | bookingDate=1983-09-19 | facility=Crestview Labs | crimeType=Assault | priority=Routine }</msg>
+<msg time="2025-05-12T23:28:27.687654" level="INFO">&amp;{random_booking} = { name=Anita Robinson | bookingDate=1988-08-07 | facility=Summit Center | crimeType=Misdemeanor | priority=Urgent }</msg>
 <var>&amp;{random_booking}</var>
 <arg>name=${random_name}</arg>
 <arg>bookingDate=${random_date}</arg>
@@ -62,263 +62,263 @@
 <arg>crimeType=${random_crime}</arg>
 <arg>priority=${random_priority}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.566993" elapsed="0.000477"/>
+<status status="PASS" start="2025-05-12T23:28:27.687209" elapsed="0.000468"/>
 </kw>
 <kw name="Log Dictionary" owner="Collections">
-<msg time="2025-05-12T23:09:16.567858" level="INFO">Dictionary size is 5 and it contains following items:
-bookingDate: 1983-09-19
-crimeType: Assault
-facility: Crestview Labs
-name: Joyce Williams
-priority: Routine</msg>
+<msg time="2025-05-12T23:28:27.687857" level="INFO">Dictionary size is 5 and it contains following items:
+bookingDate: 1988-08-07
+crimeType: Misdemeanor
+facility: Summit Center
+name: Anita Robinson
+priority: Urgent</msg>
 <arg>${random_booking}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.567629" elapsed="0.000279"/>
+<status status="PASS" start="2025-05-12T23:28:27.687765" elapsed="0.000122"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:16.568257" level="INFO">${random_booking} = {'name': 'Joyce Williams', 'bookingDate': '1983-09-19', 'facility': 'Crestview Labs', 'crimeType': 'Assault', 'priority': 'Routine'}</msg>
+<msg time="2025-05-12T23:28:27.688092" level="INFO">${random_booking} = {'name': 'Anita Robinson', 'bookingDate': '1988-08-07', 'facility': 'Summit Center', 'crimeType': 'Misdemeanor', 'priority': 'Urgent'}</msg>
 <arg>${random_booking}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.568041" elapsed="0.000263"/>
+<status status="PASS" start="2025-05-12T23:28:27.687964" elapsed="0.000158"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:16.561637" elapsed="0.006743"/>
+<status status="PASS" start="2025-05-12T23:28:27.685084" elapsed="0.003081"/>
 </kw>
 <kw name="Send Valid Booking Request" owner="keywords">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:18.618728" level="INFO">POST Request : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:29.730714" level="INFO">POST Request : url=http://localhost:5000/inmates 
  path_url=/inmates 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '132', 'Content-Type': 'application/json'} 
- body=b'{"name": "Joyce Williams", "bookingDate": "1983-09-19", "facility": "Crestview Labs", "crimeType": "Assault", "priority": "Routine"}' 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '134', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Anita Robinson", "bookingDate": "1988-08-07", "facility": "Summit Center", "crimeType": "Misdemeanor", "priority": "Urgent"}' 
  </msg>
-<msg time="2025-05-12T23:09:18.618841" level="INFO">POST Response : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:29.730894" level="INFO">POST Response : url=http://localhost:5000/inmates 
  status=201, reason=CREATED 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:09:18 GMT', 'Content-Type': 'application/json', 'Content-Length': '168', 'Connection': 'close'} 
- body={"bookingDate":"1983-09-19","crimeType":"Assault","facility":"Crestview Labs","id":"0eb9b975-e83b-45e0-9c4f-c44e45ec7f60","name":"Joyce Williams","priority":"Routine"}
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:28:29 GMT', 'Content-Type': 'application/json', 'Content-Length': '170', 'Connection': 'close'} 
+ body={"bookingDate":"1988-08-07","crimeType":"Misdemeanor","facility":"Summit Center","id":"4d087611-27f2-4997-8ce7-92982ec5116d","name":"Anita Robinson","priority":"Urgent"}
  
  </msg>
-<msg time="2025-05-12T23:09:18.618950" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2025-05-12T23:28:29.731073" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <var>${response}</var>
 <arg>jail_mock_api</arg>
 <arg>/inmates</arg>
 <arg>json=${random_booking}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-12T23:09:16.568930" elapsed="2.050042"/>
+<status status="PASS" start="2025-05-12T23:28:27.688518" elapsed="2.042596"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:18.619555" level="INFO">Status Code: 201</msg>
+<msg time="2025-05-12T23:28:29.732120" level="INFO">Status Code: 201</msg>
 <arg>Status Code: ${response.status_code}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.619133" elapsed="0.000462"/>
+<status status="PASS" start="2025-05-12T23:28:29.731368" elapsed="0.000826"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:18.620341" level="INFO">Response Body: {'bookingDate': '1983-09-19', 'crimeType': 'Assault', 'facility': 'Crestview Labs', 'id': '0eb9b975-e83b-45e0-9c4f-c44e45ec7f60', 'name': 'Joyce Williams', 'priority': 'Routine'}</msg>
+<msg time="2025-05-12T23:28:29.733450" level="INFO">Response Body: {'bookingDate': '1988-08-07', 'crimeType': 'Misdemeanor', 'facility': 'Summit Center', 'id': '4d087611-27f2-4997-8ce7-92982ec5116d', 'name': 'Anita Robinson', 'priority': 'Urgent'}</msg>
 <arg>Response Body: ${response.json()}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.619696" elapsed="0.000720"/>
+<status status="PASS" start="2025-05-12T23:28:29.732366" elapsed="0.001158"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:18.621385" level="INFO">${response_body} = {'bookingDate': '1983-09-19', 'crimeType': 'Assault', 'facility': 'Crestview Labs', 'id': '0eb9b975-e83b-45e0-9c4f-c44e45ec7f60', 'name': 'Joyce Williams', 'priority': 'Routine'}</msg>
+<msg time="2025-05-12T23:28:29.734417" level="INFO">${response_body} = {'bookingDate': '1988-08-07', 'crimeType': 'Misdemeanor', 'facility': 'Summit Center', 'id': '4d087611-27f2-4997-8ce7-92982ec5116d', 'name': 'Anita Robinson', 'priority': 'Urgent'}</msg>
 <var>${response_body}</var>
 <arg>${response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.620615" elapsed="0.000821"/>
+<status status="PASS" start="2025-05-12T23:28:29.733706" elapsed="0.000776"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:18.621921" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2025-05-12T23:28:29.735255" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.621657" elapsed="0.000325"/>
+<status status="PASS" start="2025-05-12T23:28:29.734672" elapsed="0.000648"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:18.622379" level="INFO">${response_body} = {'bookingDate': '1983-09-19', 'crimeType': 'Assault', 'facility': 'Crestview Labs', 'id': '0eb9b975-e83b-45e0-9c4f-c44e45ec7f60', 'name': 'Joyce Williams', 'priority': 'Routine'}</msg>
+<msg time="2025-05-12T23:28:29.735711" level="INFO">${response_body} = {'bookingDate': '1988-08-07', 'crimeType': 'Misdemeanor', 'facility': 'Summit Center', 'id': '4d087611-27f2-4997-8ce7-92982ec5116d', 'name': 'Anita Robinson', 'priority': 'Urgent'}</msg>
 <arg>${response_body}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.622144" elapsed="0.000289"/>
+<status status="PASS" start="2025-05-12T23:28:29.735486" elapsed="0.000277"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:16.568752" elapsed="2.054087"/>
+<status status="PASS" start="2025-05-12T23:28:27.688367" elapsed="2.047700"/>
 </kw>
 <kw name="Validate POST Successful Response" owner="keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-05-12T23:09:18.624363" level="INFO">Argument types are:
+<msg time="2025-05-12T23:28:29.741177" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${response.status_code}</arg>
 <arg>201</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.624056" elapsed="0.000704"/>
+<status status="PASS" start="2025-05-12T23:28:29.740581" elapsed="0.001192"/>
 </kw>
 <kw name="Should Contain" owner="BuiltIn">
 <arg>${response.json()}</arg>
 <arg>id</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.624854" elapsed="0.000315"/>
+<status status="PASS" start="2025-05-12T23:28:29.741950" elapsed="0.000638"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:18.625320" level="INFO">Validation Completed.</msg>
+<msg time="2025-05-12T23:28:29.742881" level="INFO">Validation Completed.</msg>
 <arg>Validation Completed.</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.625257" elapsed="0.000092"/>
+<status status="PASS" start="2025-05-12T23:28:29.742744" elapsed="0.000182"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:18.623741" elapsed="0.001647"/>
+<status status="PASS" start="2025-05-12T23:28:29.740236" elapsed="0.002750"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:16.561055" elapsed="2.064723"/>
+<status status="PASS" start="2025-05-12T23:28:27.684665" elapsed="2.058536"/>
 </test>
 <test id="s1-t2" name="1.2 Verify Inmate By Booking ID Returns Correct Data" line="18">
 <kw name="List All Inmate Bookings" owner="keywords">
 <kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:20.654351" level="INFO">GET Request : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:31.785464" level="INFO">GET Request : url=http://localhost:5000/inmates 
  path_url=/inmates 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
  body=None 
  </msg>
-<msg time="2025-05-12T23:09:20.654454" level="INFO">GET Response : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:31.785937" level="INFO">GET Response : url=http://localhost:5000/inmates 
  status=200, reason=OK 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:09:20 GMT', 'Content-Type': 'application/json', 'Content-Length': '2787', 'Connection': 'close'} 
- body=[{"bookingDate":"2013-09-19","crimeType":"Assault","facility":"Create List","id":"4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3","name":"Matthew Young","priority":"High"},{"bookingDate":"2014-07-30","crimeType":"Misdemeanor","facility":"Valley Annex","id":"4047e267-1f0a-47b0-b5b1-6c7e95cd1230","name":"Troy James","priority":"Medium"},{"bookingDate":"1989-11-06","crimeType":"Assault","facility":"Crestview Labs","id":"4f4ede9f-a1eb-4ee7-9686-f9e147b6d0ce","name":"Yolanda Walton","priority":"High"},{"bookingDate":"1995-02-05","crimeType":"Theft","facility":"Crestview Labs","id":"d3c23a9d-6815-4e82-8632-c52968aa0ec9","name":"Mrs. Katelyn Clark","priority":"High"},{"bookingDate":"2023-02-24","crimeType":"Felony","facility":"Valley Annex","id":"cb7fadef-5016-494d-acae-e139e39b88ea","name":"Test User 342","priority":"Urgent"},{"bookingDate":"2023-09-08","crimeType":"Theft","facility":"Crestview Labs","id":"cb03f170-c37b-4222-9046-cddeea0a2e71","name":"Test User 223","priority":"High"},{"bookingDate":"2024-01-30","crimeType":"Murder","facility":"Summit Center","id":"bcc0a6b5-9042-493c-9362-14deece20700","name":"Test User 951","priority":"High"},{"bookingDate":"2024-08-15","crimeType":"Theft","facility":"Crestview Labs","id":"b8a1ce01-af4e-40b8-bdc8-c5771d422c7a","name":"Test User 529","priority":"Medium"},{"bookingDate":"2024-01-22","crimeType":"Misdemeanor","facility":"Summit Center","id":"66069b8c-ab5c-4153-ae40-c060c32e157a","name":"Test User 72","priority":"Low"},{"bookingDate":"2024-06-22","crimeType":"Theft","facility":"Summit Center","id":"1c7b0560-293f-43f3-86c2-cf2cb3856b11","name":"Test User 815","priority":"High"},{"bookingDate":"2023-06-08","crimeType":"Vandalism","facility":"Oakwood Depot","id":"95184d0e-4c6d-4f46-bb66-16cf25e39d60","name":"Test User 190","priority":"Low"},{"bookingDate":"2023-11-09","crimeType":"Misdemeanor","facility":"Riverbend Hub","id":"cc7daa92-da2e-439a-9b0f-9bad74e4f1c8","name":"Test User 697","priority":"High"},{"bookingDate":"2024-03-18","crimeType":"Murder","facility":"Oakwood Depot","id":"ad6f0e54-8392-4d08-8698-2e4f89a419c7","name":"Test User 340","priority":"High"},{"bookingDate":"2024-03-21","crimeType":"Assault","facility":"Summit Center","id":"41d063a5-cc62-4ce1-bee6-71b529f1a9e3","name":"Test User 38","priority":"High"},{"bookingDate":"2025-01-26","crimeType":"Theft","facility":"Oakwood Depot","id":"c216052a-c479-4436-a327-c5f90f815aa4","name":"Test User 983","priority":"Medium"},{"bookingDate":"2023-08-09","crimeType":"Murder","facility":"Valley Annex","id":"886dde67-9fbf-4fbf-863a-3395bcb7f4ed","name":"Test User 458","priority":"Routine"},{"bookingDate":"1983-09-19","crimeType":"Assault","facility":"Crestview Labs","id":"0eb9b975-e83b-45e0-9c4f-c44e45ec7f60","name":"Joyce Williams","priority":"Routine"}]
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:28:31 GMT', 'Content-Type': 'application/json', 'Content-Length': '1648', 'Connection': 'close'} 
+ body=[{"bookingDate":"2024-10-07","crimeType":"Murder","facility":"Valley Annex","id":"be2ca1a1-0792-4708-993b-804ddd4f6cbd","name":"Test User 604","priority":"Medium"},{"bookingDate":"2023-04-15","crimeType":"Vandalism","facility":"Riverbend Hub","id":"cbd4efa4-74a5-4d39-8c8c-2e0783f93c81","name":"Test User 392","priority":"Medium"},{"bookingDate":"2023-12-05","crimeType":"Felony","facility":"Oakwood Depot","id":"c29f9dd6-f695-47b3-b5eb-8d0eba8f09f2","name":"Test User 471","priority":"Routine"},{"bookingDate":"2023-03-26","crimeType":"Misdemeanor","facility":"Valley Annex","id":"4324da69-8183-493e-920d-0e35c79811b9","name":"Test User 365","priority":"Medium"},{"bookingDate":"2024-01-03","crimeType":"Misdemeanor","facility":"Valley Annex","id":"8faf90b6-69ef-4694-92c2-f55471bff504","name":"Test User 726","priority":"High"},{"bookingDate":"2023-08-25","crimeType":"Theft","facility":"Riverbend Hub","id":"57028c55-0852-4266-9c16-e6c1642f30dd","name":"Test User 280","priority":"Low"},{"bookingDate":"2024-11-15","crimeType":"Felony","facility":"Valley Annex","id":"f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35","name":"Test User 156","priority":"High"},{"bookingDate":"2025-03-12","crimeType":"Assault","facility":"Valley Annex","id":"02447ee3-3226-4168-9f20-74b3cddcf1de","name":"Test User 777","priority":"Medium"},{"bookingDate":"2023-01-19","crimeType":"Felony","facility":"Oakwood Depot","id":"d5bbf163-9cc9-4801-ad11-7760e6fd3fa5","name":"Test User 176","priority":"High"},{"bookingDate":"1988-08-07","crimeType":"Misdemeanor","facility":"Summit Center","id":"4d087611-27f2-4997-8ce7-92982ec5116d","name":"Anita Robinson","priority":"Urgent"}]
  
  </msg>
-<msg time="2025-05-12T23:09:20.654606" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2025-05-12T23:28:31.786181" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>jail_mock_api</arg>
 <arg>/inmates</arg>
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-12T23:09:18.627722" elapsed="2.026918"/>
+<status status="PASS" start="2025-05-12T23:28:29.744226" elapsed="2.042022"/>
 </kw>
 <kw name="Convert To String" owner="BuiltIn">
-<msg time="2025-05-12T23:09:20.655658" level="INFO">${body} = [{'bookingDate': '2013-09-19', 'crimeType': 'Assault', 'facility': 'Create List', 'id': '4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', 'name': 'Matthew Young', 'priority': 'High'}, {'bookingDate': '2014-07-3...</msg>
+<msg time="2025-05-12T23:28:31.788147" level="INFO">${body} = [{'bookingDate': '2024-10-07', 'crimeType': 'Murder', 'facility': 'Valley Annex', 'id': 'be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'name': 'Test User 604', 'priority': 'Medium'}, {'bookingDate': '2023-04...</msg>
 <var>${body}</var>
 <arg>${response.json()}</arg>
 <doc>Converts the given item to a Unicode string.</doc>
-<status status="PASS" start="2025-05-12T23:09:20.654833" elapsed="0.000857"/>
+<status status="PASS" start="2025-05-12T23:28:31.786562" elapsed="0.001633"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:20.655956" level="INFO">All Inmate Booking As String: [{'bookingDate': '2013-09-19', 'crimeType': 'Assault', 'facility': 'Create List', 'id': '4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', 'name': 'Matthew Young', 'priority': 'High'}, {'bookingDate': '2014-07-30', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '4047e267-1f0a-47b0-b5b1-6c7e95cd1230', 'name': 'Troy James', 'priority': 'Medium'}, {'bookingDate': '1989-11-06', 'crimeType': 'Assault', 'facility': 'Crestview Labs', 'id': '4f4ede9f-a1eb-4ee7-9686-f9e147b6d0ce', 'name': 'Yolanda Walton', 'priority': 'High'}, {'bookingDate': '1995-02-05', 'crimeType': 'Theft', 'facility': 'Crestview Labs', 'id': 'd3c23a9d-6815-4e82-8632-c52968aa0ec9', 'name': 'Mrs. Katelyn Clark', 'priority': 'High'}, {'bookingDate': '2023-02-24', 'crimeType': 'Felony', 'facility': 'Valley Annex', 'id': 'cb7fadef-5016-494d-acae-e139e39b88ea', 'name': 'Test User 342', 'priority': 'Urgent'}, {'bookingDate': '2023-09-08', 'crimeType': 'Theft', 'facility': 'Crestview Labs', 'id': 'cb03f170-c37b-4222-9046-cddeea0a2e71', 'name': 'Test User 223', 'priority': 'High'}, {'bookingDate': '2024-01-30', 'crimeType': 'Murder', 'facility': 'Summit Center', 'id': 'bcc0a6b5-9042-493c-9362-14deece20700', 'name': 'Test User 951', 'priority': 'High'}, {'bookingDate': '2024-08-15', 'crimeType': 'Theft', 'facility': 'Crestview Labs', 'id': 'b8a1ce01-af4e-40b8-bdc8-c5771d422c7a', 'name': 'Test User 529', 'priority': 'Medium'}, {'bookingDate': '2024-01-22', 'crimeType': 'Misdemeanor', 'facility': 'Summit Center', 'id': '66069b8c-ab5c-4153-ae40-c060c32e157a', 'name': 'Test User 72', 'priority': 'Low'}, {'bookingDate': '2024-06-22', 'crimeType': 'Theft', 'facility': 'Summit Center', 'id': '1c7b0560-293f-43f3-86c2-cf2cb3856b11', 'name': 'Test User 815', 'priority': 'High'}, {'bookingDate': '2023-06-08', 'crimeType': 'Vandalism', 'facility': 'Oakwood Depot', 'id': '95184d0e-4c6d-4f46-bb66-16cf25e39d60', 'name': 'Test User 190', 'priority': 'Low'}, {'bookingDate': '2023-11-09', 'crimeType': 'Misdemeanor', 'facility': 'Riverbend Hub', 'id': 'cc7daa92-da2e-439a-9b0f-9bad74e4f1c8', 'name': 'Test User 697', 'priority': 'High'}, {'bookingDate': '2024-03-18', 'crimeType': 'Murder', 'facility': 'Oakwood Depot', 'id': 'ad6f0e54-8392-4d08-8698-2e4f89a419c7', 'name': 'Test User 340', 'priority': 'High'}, {'bookingDate': '2024-03-21', 'crimeType': 'Assault', 'facility': 'Summit Center', 'id': '41d063a5-cc62-4ce1-bee6-71b529f1a9e3', 'name': 'Test User 38', 'priority': 'High'}, {'bookingDate': '2025-01-26', 'crimeType': 'Theft', 'facility': 'Oakwood Depot', 'id': 'c216052a-c479-4436-a327-c5f90f815aa4', 'name': 'Test User 983', 'priority': 'Medium'}, {'bookingDate': '2023-08-09', 'crimeType': 'Murder', 'facility': 'Valley Annex', 'id': '886dde67-9fbf-4fbf-863a-3395bcb7f4ed', 'name': 'Test User 458', 'priority': 'Routine'}, {'bookingDate': '1983-09-19', 'crimeType': 'Assault', 'facility': 'Crestview Labs', 'id': '0eb9b975-e83b-45e0-9c4f-c44e45ec7f60', 'name': 'Joyce Williams', 'priority': 'Routine'}]</msg>
+<msg time="2025-05-12T23:28:31.788615" level="INFO">All Inmate Booking As String: [{'bookingDate': '2024-10-07', 'crimeType': 'Murder', 'facility': 'Valley Annex', 'id': 'be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'name': 'Test User 604', 'priority': 'Medium'}, {'bookingDate': '2023-04-15', 'crimeType': 'Vandalism', 'facility': 'Riverbend Hub', 'id': 'cbd4efa4-74a5-4d39-8c8c-2e0783f93c81', 'name': 'Test User 392', 'priority': 'Medium'}, {'bookingDate': '2023-12-05', 'crimeType': 'Felony', 'facility': 'Oakwood Depot', 'id': 'c29f9dd6-f695-47b3-b5eb-8d0eba8f09f2', 'name': 'Test User 471', 'priority': 'Routine'}, {'bookingDate': '2023-03-26', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '4324da69-8183-493e-920d-0e35c79811b9', 'name': 'Test User 365', 'priority': 'Medium'}, {'bookingDate': '2024-01-03', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '8faf90b6-69ef-4694-92c2-f55471bff504', 'name': 'Test User 726', 'priority': 'High'}, {'bookingDate': '2023-08-25', 'crimeType': 'Theft', 'facility': 'Riverbend Hub', 'id': '57028c55-0852-4266-9c16-e6c1642f30dd', 'name': 'Test User 280', 'priority': 'Low'}, {'bookingDate': '2024-11-15', 'crimeType': 'Felony', 'facility': 'Valley Annex', 'id': 'f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35', 'name': 'Test User 156', 'priority': 'High'}, {'bookingDate': '2025-03-12', 'crimeType': 'Assault', 'facility': 'Valley Annex', 'id': '02447ee3-3226-4168-9f20-74b3cddcf1de', 'name': 'Test User 777', 'priority': 'Medium'}, {'bookingDate': '2023-01-19', 'crimeType': 'Felony', 'facility': 'Oakwood Depot', 'id': 'd5bbf163-9cc9-4801-ad11-7760e6fd3fa5', 'name': 'Test User 176', 'priority': 'High'}, {'bookingDate': '1988-08-07', 'crimeType': 'Misdemeanor', 'facility': 'Summit Center', 'id': '4d087611-27f2-4997-8ce7-92982ec5116d', 'name': 'Anita Robinson', 'priority': 'Urgent'}]</msg>
 <arg>All Inmate Booking As String: ${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:20.655826" elapsed="0.000315"/>
+<status status="PASS" start="2025-05-12T23:28:31.788410" elapsed="0.000283"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:20.656413" level="INFO">${body} = [{'bookingDate': '2013-09-19', 'crimeType': 'Assault', 'facility': 'Create List', 'id': '4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', 'name': 'Matthew Young', 'priority': 'High'}, {'bookingDate': '2014-07-3...</msg>
+<msg time="2025-05-12T23:28:31.789074" level="INFO">${body} = [{'bookingDate': '2024-10-07', 'crimeType': 'Murder', 'facility': 'Valley Annex', 'id': 'be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'name': 'Test User 604', 'priority': 'Medium'}, {'bookingDate': '2023-04...</msg>
 <arg>${body}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2025-05-12T23:09:20.656256" elapsed="0.000198"/>
+<status status="PASS" start="2025-05-12T23:28:31.788862" elapsed="0.000337"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:18.627496" elapsed="2.029054"/>
+<status status="PASS" start="2025-05-12T23:28:29.744003" elapsed="2.045320"/>
 </kw>
 <kw name="Choose Random Inmate Booking" owner="keywords">
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-05-12T23:09:20.657681" level="INFO">${bookings} = ['4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', '4047e267-1f0a-47b0-b5b1-6c7e95cd1230', '4f4ede9f-a1eb-4ee7-9686-f9e147b6d0ce', 'd3c23a9d-6815-4e82-8632-c52968aa0ec9', 'cb7fadef-5016-494d-acae-e139e39b88ea',...</msg>
+<msg time="2025-05-12T23:28:31.793629" level="INFO">${bookings} = ['be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'cbd4efa4-74a5-4d39-8c8c-2e0783f93c81', 'c29f9dd6-f695-47b3-b5eb-8d0eba8f09f2', '4324da69-8183-493e-920d-0e35c79811b9', '8faf90b6-69ef-4694-92c2-f55471bff504',...</msg>
 <var>${bookings}</var>
 <arg>[booking["id"] for booking in ${body}]</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-05-12T23:09:20.657182" elapsed="0.000528"/>
+<status status="PASS" start="2025-05-12T23:28:31.793049" elapsed="0.000610"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:20.657955" level="INFO">Available Booking IDs: ['4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', '4047e267-1f0a-47b0-b5b1-6c7e95cd1230', '4f4ede9f-a1eb-4ee7-9686-f9e147b6d0ce', 'd3c23a9d-6815-4e82-8632-c52968aa0ec9', 'cb7fadef-5016-494d-acae-e139e39b88ea', 'cb03f170-c37b-4222-9046-cddeea0a2e71', 'bcc0a6b5-9042-493c-9362-14deece20700', 'b8a1ce01-af4e-40b8-bdc8-c5771d422c7a', '66069b8c-ab5c-4153-ae40-c060c32e157a', '1c7b0560-293f-43f3-86c2-cf2cb3856b11', '95184d0e-4c6d-4f46-bb66-16cf25e39d60', 'cc7daa92-da2e-439a-9b0f-9bad74e4f1c8', 'ad6f0e54-8392-4d08-8698-2e4f89a419c7', '41d063a5-cc62-4ce1-bee6-71b529f1a9e3', 'c216052a-c479-4436-a327-c5f90f815aa4', '886dde67-9fbf-4fbf-863a-3395bcb7f4ed', '0eb9b975-e83b-45e0-9c4f-c44e45ec7f60']</msg>
+<msg time="2025-05-12T23:28:31.793875" level="INFO">Available Booking IDs: ['be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'cbd4efa4-74a5-4d39-8c8c-2e0783f93c81', 'c29f9dd6-f695-47b3-b5eb-8d0eba8f09f2', '4324da69-8183-493e-920d-0e35c79811b9', '8faf90b6-69ef-4694-92c2-f55471bff504', '57028c55-0852-4266-9c16-e6c1642f30dd', 'f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35', '02447ee3-3226-4168-9f20-74b3cddcf1de', 'd5bbf163-9cc9-4801-ad11-7760e6fd3fa5', '4d087611-27f2-4997-8ce7-92982ec5116d']</msg>
 <arg>Available Booking IDs: ${bookings}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:20.657808" elapsed="0.000202"/>
+<status status="PASS" start="2025-05-12T23:28:31.793759" elapsed="0.000264"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:20.658314" level="INFO">${chosen_booking} = 95184d0e-4c6d-4f46-bb66-16cf25e39d60</msg>
+<msg time="2025-05-12T23:28:31.794396" level="INFO">${chosen_booking} = f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35</msg>
 <var>${chosen_booking}</var>
 <arg>${bookings}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:20.658082" elapsed="0.000250"/>
+<status status="PASS" start="2025-05-12T23:28:31.794110" elapsed="0.000306"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:20.658512" level="INFO">Chosen Inmate Booking ID: 95184d0e-4c6d-4f46-bb66-16cf25e39d60</msg>
+<msg time="2025-05-12T23:28:31.794588" level="INFO">Chosen Inmate Booking ID: f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35</msg>
 <arg>Chosen Inmate Booking ID: ${chosen_booking}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:20.658415" elapsed="0.000125"/>
+<status status="PASS" start="2025-05-12T23:28:31.794495" elapsed="0.000121"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:20.658730" level="INFO">${chosen_booking} = 95184d0e-4c6d-4f46-bb66-16cf25e39d60</msg>
+<msg time="2025-05-12T23:28:31.794801" level="INFO">${chosen_booking} = f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35</msg>
 <arg>${chosen_booking}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2025-05-12T23:09:20.658624" elapsed="0.000132"/>
+<status status="PASS" start="2025-05-12T23:28:31.794691" elapsed="0.000136"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:20.656909" elapsed="0.001885"/>
+<status status="PASS" start="2025-05-12T23:28:31.792711" elapsed="0.002155"/>
 </kw>
 <kw name="Validate GET Successful Response" owner="keywords">
 <kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:22.703737" level="INFO">GET Request : url=http://localhost:5000/inmates/95184d0e-4c6d-4f46-bb66-16cf25e39d60 
- path_url=/inmates/95184d0e-4c6d-4f46-bb66-16cf25e39d60 
+<msg time="2025-05-12T23:28:33.828070" level="INFO">GET Request : url=http://localhost:5000/inmates/f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35 
+ path_url=/inmates/f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
  body=None 
  </msg>
-<msg time="2025-05-12T23:09:22.703892" level="INFO">GET Response : url=http://localhost:5000/inmates/95184d0e-4c6d-4f46-bb66-16cf25e39d60 
+<msg time="2025-05-12T23:28:33.828261" level="INFO">GET Response : url=http://localhost:5000/inmates/f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35 
  status=404, reason=NOT FOUND 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:09:22 GMT', 'Content-Type': 'application/json', 'Content-Length': '164', 'Connection': 'close'} 
- body={"bookingDate":"2023-06-08","crimeType":"Vandalism","facility":"Oakwood Depot","id":"95184d0e-4c6d-4f46-bb66-16cf25e39d60","name":"Test User 190","priority":"Low"}
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:28:33 GMT', 'Content-Type': 'application/json', 'Content-Length': '161', 'Connection': 'close'} 
+ body={"bookingDate":"2024-11-15","crimeType":"Felony","facility":"Valley Annex","id":"f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35","name":"Test User 156","priority":"High"}
  
  </msg>
-<msg time="2025-05-12T23:09:22.704191" level="FAIL">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/95184d0e-4c6d-4f46-bb66-16cf25e39d60</msg>
+<msg time="2025-05-12T23:28:33.828648" level="FAIL">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35</msg>
 <var>${response}</var>
 <arg>jail_mock_api</arg>
 <arg>/inmates/${chosen_booking}</arg>
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="FAIL" start="2025-05-12T23:09:20.659211" elapsed="2.049565">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/95184d0e-4c6d-4f46-bb66-16cf25e39d60</status>
+<status status="FAIL" start="2025-05-12T23:28:31.795264" elapsed="2.037887">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35</status>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${response.status_code}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="NOT RUN" start="2025-05-12T23:09:22.709184" elapsed="0.000057"/>
+<status status="NOT RUN" start="2025-05-12T23:28:33.833505" elapsed="0.000047"/>
 </kw>
 <kw name="Should Contain" owner="BuiltIn">
 <arg>${response.json()}</arg>
 <arg>name</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="NOT RUN" start="2025-05-12T23:09:22.709432" elapsed="0.000037"/>
+<status status="NOT RUN" start="2025-05-12T23:28:33.833717" elapsed="0.000029"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>Inmate Information: ${response.json()}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2025-05-12T23:09:22.709648" elapsed="0.000034"/>
+<status status="NOT RUN" start="2025-05-12T23:28:33.833889" elapsed="0.000027"/>
 </kw>
-<status status="FAIL" start="2025-05-12T23:09:20.659010" elapsed="2.050951">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/95184d0e-4c6d-4f46-bb66-16cf25e39d60</status>
+<status status="FAIL" start="2025-05-12T23:28:31.795076" elapsed="2.039045">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35</status>
 </kw>
-<status status="FAIL" start="2025-05-12T23:09:18.626888" elapsed="4.083682">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/95184d0e-4c6d-4f46-bb66-16cf25e39d60</status>
+<status status="FAIL" start="2025-05-12T23:28:29.743543" elapsed="4.091076">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35</status>
 </test>
 <test id="s1-t3" name="1.3 Confirm Booking Sync With RMS" line="23">
 <kw name="Generate Random Booking Data" owner="keywords">
 <kw name="Name" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:22.713981" level="INFO">${random_name} = Erin Lawson</msg>
+<msg time="2025-05-12T23:28:33.838118" level="INFO">${random_name} = Tiffany Cantu</msg>
 <var>${random_name}</var>
 <doc>:example: 'John Doe'</doc>
-<status status="PASS" start="2025-05-12T23:09:22.713554" elapsed="0.000467"/>
+<status status="PASS" start="2025-05-12T23:28:33.837390" elapsed="0.000787"/>
 </kw>
 <kw name="Date" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:22.714470" level="INFO">${random_date} = 1977-04-07</msg>
+<msg time="2025-05-12T23:28:33.838915" level="INFO">${random_date} = 1972-05-10</msg>
 <var>${random_date}</var>
 <arg>pattern='%Y-%m-%d'</arg>
 <doc>Get a date string between January 1, 1970 and now.</doc>
-<status status="PASS" start="2025-05-12T23:09:22.714149" elapsed="0.000355"/>
+<status status="PASS" start="2025-05-12T23:28:33.838380" elapsed="0.000585"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:22.714982" level="INFO">${random_facility} = Oakwood Depot</msg>
+<msg time="2025-05-12T23:28:33.839812" level="INFO">${random_facility} = Summit Center</msg>
 <var>${random_facility}</var>
 <arg>${FACILITIES}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:22.714632" elapsed="0.000381"/>
+<status status="PASS" start="2025-05-12T23:28:33.839155" elapsed="0.000722"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:22.715405" level="INFO">${random_crime} = Theft</msg>
+<msg time="2025-05-12T23:28:33.840565" level="INFO">${random_crime} = Assault</msg>
 <var>${random_crime}</var>
 <arg>${CRIME_TYPES}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:22.715130" elapsed="0.000307"/>
+<status status="PASS" start="2025-05-12T23:28:33.840104" elapsed="0.000510"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:22.715777" level="INFO">${random_priority} = Medium</msg>
+<msg time="2025-05-12T23:28:33.841277" level="INFO">${random_priority} = High</msg>
 <var>${random_priority}</var>
 <arg>${PRIORITY}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:22.715542" elapsed="0.000260"/>
+<status status="PASS" start="2025-05-12T23:28:33.840834" elapsed="0.000493"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-12T23:09:22.716281" level="INFO">&amp;{random_booking} = { name=Erin Lawson | bookingDate=1977-04-07 | facility=Oakwood Depot | crimeType=Theft | priority=Medium }</msg>
+<msg time="2025-05-12T23:28:33.842189" level="INFO">&amp;{random_booking} = { name=Tiffany Cantu | bookingDate=1972-05-10 | facility=Summit Center | crimeType=Assault | priority=High }</msg>
 <var>&amp;{random_booking}</var>
 <arg>name=${random_name}</arg>
 <arg>bookingDate=${random_date}</arg>
@@ -326,182 +326,182 @@ priority: Routine</msg>
 <arg>crimeType=${random_crime}</arg>
 <arg>priority=${random_priority}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-12T23:09:22.715918" elapsed="0.000469"/>
+<status status="PASS" start="2025-05-12T23:28:33.841542" elapsed="0.000695"/>
 </kw>
 <kw name="Log Dictionary" owner="Collections">
-<msg time="2025-05-12T23:09:22.716634" level="INFO">Dictionary size is 5 and it contains following items:
-bookingDate: 1977-04-07
-crimeType: Theft
-facility: Oakwood Depot
-name: Erin Lawson
-priority: Medium</msg>
+<msg time="2025-05-12T23:28:33.842645" level="INFO">Dictionary size is 5 and it contains following items:
+bookingDate: 1972-05-10
+crimeType: Assault
+facility: Summit Center
+name: Tiffany Cantu
+priority: High</msg>
 <arg>${random_booking}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<status status="PASS" start="2025-05-12T23:09:22.716506" elapsed="0.000174"/>
+<status status="PASS" start="2025-05-12T23:28:33.842436" elapsed="0.000324"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:22.716980" level="INFO">${random_booking} = {'name': 'Erin Lawson', 'bookingDate': '1977-04-07', 'facility': 'Oakwood Depot', 'crimeType': 'Theft', 'priority': 'Medium'}</msg>
+<msg time="2025-05-12T23:28:33.843238" level="INFO">${random_booking} = {'name': 'Tiffany Cantu', 'bookingDate': '1972-05-10', 'facility': 'Summit Center', 'crimeType': 'Assault', 'priority': 'High'}</msg>
 <arg>${random_booking}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:22.716794" elapsed="0.000222"/>
+<status status="PASS" start="2025-05-12T23:28:33.842947" elapsed="0.000352"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:22.713226" elapsed="0.003842"/>
+<status status="PASS" start="2025-05-12T23:28:33.836600" elapsed="0.006794"/>
 </kw>
 <kw name="Send Valid Booking Request" owner="keywords">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:24.762148" level="INFO">POST Request : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:35.905637" level="INFO">POST Request : url=http://localhost:5000/inmates 
  path_url=/inmates 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '125', 'Content-Type': 'application/json'} 
- body=b'{"name": "Erin Lawson", "bookingDate": "1977-04-07", "facility": "Oakwood Depot", "crimeType": "Theft", "priority": "Medium"}' 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '127', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Tiffany Cantu", "bookingDate": "1972-05-10", "facility": "Summit Center", "crimeType": "Assault", "priority": "High"}' 
  </msg>
-<msg time="2025-05-12T23:09:24.762223" level="INFO">POST Response : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:35.905793" level="INFO">POST Response : url=http://localhost:5000/inmates 
  status=201, reason=CREATED 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:09:24 GMT', 'Content-Type': 'application/json', 'Content-Length': '161', 'Connection': 'close'} 
- body={"bookingDate":"1977-04-07","crimeType":"Theft","facility":"Oakwood Depot","id":"49058291-ae40-4af5-9ef8-1851c79b535e","name":"Erin Lawson","priority":"Medium"}
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:28:35 GMT', 'Content-Type': 'application/json', 'Content-Length': '163', 'Connection': 'close'} 
+ body={"bookingDate":"1972-05-10","crimeType":"Assault","facility":"Summit Center","id":"8a40d14a-e798-429a-a219-7687e4341a9c","name":"Tiffany Cantu","priority":"High"}
  
  </msg>
-<msg time="2025-05-12T23:09:24.762900" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2025-05-12T23:28:35.906369" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <var>${response}</var>
 <arg>jail_mock_api</arg>
 <arg>/inmates</arg>
 <arg>json=${random_booking}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-12T23:09:22.717525" elapsed="2.045423"/>
+<status status="PASS" start="2025-05-12T23:28:33.845744" elapsed="2.060728"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:24.763577" level="INFO">Status Code: 201</msg>
+<msg time="2025-05-12T23:28:35.907822" level="INFO">Status Code: 201</msg>
 <arg>Status Code: ${response.status_code}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:24.763102" elapsed="0.000517"/>
+<status status="PASS" start="2025-05-12T23:28:35.906877" elapsed="0.001056"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:24.764099" level="INFO">Response Body: {'bookingDate': '1977-04-07', 'crimeType': 'Theft', 'facility': 'Oakwood Depot', 'id': '49058291-ae40-4af5-9ef8-1851c79b535e', 'name': 'Erin Lawson', 'priority': 'Medium'}</msg>
+<msg time="2025-05-12T23:28:35.909141" level="INFO">Response Body: {'bookingDate': '1972-05-10', 'crimeType': 'Assault', 'facility': 'Summit Center', 'id': '8a40d14a-e798-429a-a219-7687e4341a9c', 'name': 'Tiffany Cantu', 'priority': 'High'}</msg>
 <arg>Response Body: ${response.json()}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:24.763725" elapsed="0.000415"/>
+<status status="PASS" start="2025-05-12T23:28:35.908236" elapsed="0.000989"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:24.764736" level="INFO">${response_body} = {'bookingDate': '1977-04-07', 'crimeType': 'Theft', 'facility': 'Oakwood Depot', 'id': '49058291-ae40-4af5-9ef8-1851c79b535e', 'name': 'Erin Lawson', 'priority': 'Medium'}</msg>
+<msg time="2025-05-12T23:28:35.910273" level="INFO">${response_body} = {'bookingDate': '1972-05-10', 'crimeType': 'Assault', 'facility': 'Summit Center', 'id': '8a40d14a-e798-429a-a219-7687e4341a9c', 'name': 'Tiffany Cantu', 'priority': 'High'}</msg>
 <var>${response_body}</var>
 <arg>${response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-12T23:09:24.764291" elapsed="0.000471"/>
+<status status="PASS" start="2025-05-12T23:28:35.909426" elapsed="0.000901"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:24.765015" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2025-05-12T23:28:35.910828" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:24.764869" elapsed="0.000188"/>
+<status status="PASS" start="2025-05-12T23:28:35.910551" elapsed="0.000357"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:24.765285" level="INFO">${response_body} = {'bookingDate': '1977-04-07', 'crimeType': 'Theft', 'facility': 'Oakwood Depot', 'id': '49058291-ae40-4af5-9ef8-1851c79b535e', 'name': 'Erin Lawson', 'priority': 'Medium'}</msg>
+<msg time="2025-05-12T23:28:35.911346" level="INFO">${response_body} = {'bookingDate': '1972-05-10', 'crimeType': 'Assault', 'facility': 'Summit Center', 'id': '8a40d14a-e798-429a-a219-7687e4341a9c', 'name': 'Tiffany Cantu', 'priority': 'High'}</msg>
 <arg>${response_body}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:24.765151" elapsed="0.000166"/>
+<status status="PASS" start="2025-05-12T23:28:35.911079" elapsed="0.000331"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:22.717319" elapsed="2.048051"/>
+<status status="PASS" start="2025-05-12T23:28:33.845318" elapsed="2.066188"/>
 </kw>
 <kw name="Retrieve Booking ID From Request" owner="keywords">
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-12T23:09:24.767050" level="INFO">${booking_id} = 49058291-ae40-4af5-9ef8-1851c79b535e</msg>
+<msg time="2025-05-12T23:28:35.914660" level="INFO">${booking_id} = 8a40d14a-e798-429a-a219-7687e4341a9c</msg>
 <var>${booking_id}</var>
 <arg>${response_body}</arg>
 <arg>id</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-12T23:09:24.765943" elapsed="0.001132"/>
+<status status="PASS" start="2025-05-12T23:28:35.914410" elapsed="0.000289"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:24.767333" level="INFO">Booking Record ID: 49058291-ae40-4af5-9ef8-1851c79b535e</msg>
+<msg time="2025-05-12T23:28:35.915017" level="INFO">Booking Record ID: 8a40d14a-e798-429a-a219-7687e4341a9c</msg>
 <arg>Booking Record ID: ${booking_id}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:24.767183" elapsed="0.000185"/>
+<status status="PASS" start="2025-05-12T23:28:35.914853" elapsed="0.000217"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:24.767596" level="INFO">${booking_id} = 49058291-ae40-4af5-9ef8-1851c79b535e</msg>
+<msg time="2025-05-12T23:28:35.915540" level="INFO">${booking_id} = 8a40d14a-e798-429a-a219-7687e4341a9c</msg>
 <arg>${booking_id}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2025-05-12T23:09:24.767466" elapsed="0.000162"/>
+<status status="PASS" start="2025-05-12T23:28:35.915218" elapsed="0.000383"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:24.765741" elapsed="0.001935"/>
+<status status="PASS" start="2025-05-12T23:28:35.914023" elapsed="0.001672"/>
 </kw>
 <kw name="Compare Booking Record With RMS" owner="keywords">
 <kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:26.809296" level="INFO">GET Request : url=http://localhost:5000/inmates/49058291-ae40-4af5-9ef8-1851c79b535e 
- path_url=/inmates/49058291-ae40-4af5-9ef8-1851c79b535e 
+<msg time="2025-05-12T23:28:37.943702" level="INFO">GET Request : url=http://localhost:5000/inmates/8a40d14a-e798-429a-a219-7687e4341a9c 
+ path_url=/inmates/8a40d14a-e798-429a-a219-7687e4341a9c 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
  body=None 
  </msg>
-<msg time="2025-05-12T23:09:26.809479" level="INFO">GET Response : url=http://localhost:5000/inmates/49058291-ae40-4af5-9ef8-1851c79b535e 
+<msg time="2025-05-12T23:28:37.943830" level="INFO">GET Response : url=http://localhost:5000/inmates/8a40d14a-e798-429a-a219-7687e4341a9c 
  status=404, reason=NOT FOUND 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:09:26 GMT', 'Content-Type': 'application/json', 'Content-Length': '161', 'Connection': 'close'} 
- body={"bookingDate":"1977-04-07","crimeType":"Theft","facility":"Oakwood Depot","id":"49058291-ae40-4af5-9ef8-1851c79b535e","name":"Erin Lawson","priority":"Medium"}
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:28:37 GMT', 'Content-Type': 'application/json', 'Content-Length': '163', 'Connection': 'close'} 
+ body={"bookingDate":"1972-05-10","crimeType":"Assault","facility":"Summit Center","id":"8a40d14a-e798-429a-a219-7687e4341a9c","name":"Tiffany Cantu","priority":"High"}
  
  </msg>
-<msg time="2025-05-12T23:09:26.809723" level="FAIL">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/49058291-ae40-4af5-9ef8-1851c79b535e</msg>
+<msg time="2025-05-12T23:28:37.943997" level="FAIL">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/8a40d14a-e798-429a-a219-7687e4341a9c</msg>
 <var>${response}</var>
 <arg>jail_mock_api</arg>
 <arg>/inmates/${booking_id}</arg>
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="FAIL" start="2025-05-12T23:09:24.768102" elapsed="2.043365">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/49058291-ae40-4af5-9ef8-1851c79b535e</status>
+<status status="FAIL" start="2025-05-12T23:28:35.916638" elapsed="2.028377">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/8a40d14a-e798-429a-a219-7687e4341a9c</status>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>Booking Data: ${response.json()}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2025-05-12T23:09:26.811945" elapsed="0.000059"/>
+<status status="NOT RUN" start="2025-05-12T23:28:37.945257" elapsed="0.000034"/>
 </kw>
 <kw name="Should Contain" owner="BuiltIn">
 <arg>${response.text}</arg>
 <arg>${booking_id}</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="NOT RUN" start="2025-05-12T23:09:26.812216" elapsed="0.000388"/>
+<status status="NOT RUN" start="2025-05-12T23:28:37.945395" elapsed="0.000020"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>Booking ID ${booking_id} found in response: ${response.json()}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2025-05-12T23:09:26.813030" elapsed="0.000041"/>
+<status status="NOT RUN" start="2025-05-12T23:28:37.945504" elapsed="0.000031"/>
 </kw>
-<status status="FAIL" start="2025-05-12T23:09:24.767878" elapsed="2.045430">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/49058291-ae40-4af5-9ef8-1851c79b535e</status>
+<status status="FAIL" start="2025-05-12T23:28:35.916393" elapsed="2.029266">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/8a40d14a-e798-429a-a219-7687e4341a9c</status>
 </kw>
-<status status="FAIL" start="2025-05-12T23:09:22.712268" elapsed="4.102385">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/49058291-ae40-4af5-9ef8-1851c79b535e</status>
+<status status="FAIL" start="2025-05-12T23:28:33.835281" elapsed="4.111025">HTTPError: 404 Client Error: NOT FOUND for url: http://localhost:5000/inmates/8a40d14a-e798-429a-a219-7687e4341a9c</status>
 </test>
 <test id="s1-t4" name="1.4 Validate All Required Fields From Booking Response" line="29">
 <kw name="Generate Random Booking Data" owner="keywords">
 <kw name="Name" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:26.818155" level="INFO">${random_name} = John Nguyen</msg>
+<msg time="2025-05-12T23:28:37.948921" level="INFO">${random_name} = Nicholas Hood</msg>
 <var>${random_name}</var>
 <doc>:example: 'John Doe'</doc>
-<status status="PASS" start="2025-05-12T23:09:26.817380" elapsed="0.000818"/>
+<status status="PASS" start="2025-05-12T23:28:37.948387" elapsed="0.000603"/>
 </kw>
 <kw name="Date" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:26.818681" level="INFO">${random_date} = 1981-01-10</msg>
+<msg time="2025-05-12T23:28:37.949519" level="INFO">${random_date} = 1975-03-09</msg>
 <var>${random_date}</var>
 <arg>pattern='%Y-%m-%d'</arg>
 <doc>Get a date string between January 1, 1970 and now.</doc>
-<status status="PASS" start="2025-05-12T23:09:26.818342" elapsed="0.000372"/>
+<status status="PASS" start="2025-05-12T23:28:37.949132" elapsed="0.000421"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:26.819263" level="INFO">${random_facility} = Riverbend Hub</msg>
+<msg time="2025-05-12T23:28:37.950065" level="INFO">${random_facility} = Valley Annex</msg>
 <var>${random_facility}</var>
 <arg>${FACILITIES}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:26.818849" elapsed="0.000448"/>
+<status status="PASS" start="2025-05-12T23:28:37.949688" elapsed="0.000407"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:26.820015" level="INFO">${random_crime} = Assault</msg>
+<msg time="2025-05-12T23:28:37.950558" level="INFO">${random_crime} = Misdemeanor</msg>
 <var>${random_crime}</var>
 <arg>${CRIME_TYPES}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:26.819423" elapsed="0.000965"/>
+<status status="PASS" start="2025-05-12T23:28:37.950243" elapsed="0.000344"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:26.821085" level="INFO">${random_priority} = Urgent</msg>
+<msg time="2025-05-12T23:28:37.951028" level="INFO">${random_priority} = Urgent</msg>
 <var>${random_priority}</var>
 <arg>${PRIORITY}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:26.820613" elapsed="0.000520"/>
+<status status="PASS" start="2025-05-12T23:28:37.950696" elapsed="0.000364"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-12T23:09:26.821933" level="INFO">&amp;{random_booking} = { name=John Nguyen | bookingDate=1981-01-10 | facility=Riverbend Hub | crimeType=Assault | priority=Urgent }</msg>
+<msg time="2025-05-12T23:28:37.952144" level="INFO">&amp;{random_booking} = { name=Nicholas Hood | bookingDate=1975-03-09 | facility=Valley Annex | crimeType=Misdemeanor | priority=Urgent }</msg>
 <var>&amp;{random_booking}</var>
 <arg>name=${random_name}</arg>
 <arg>bookingDate=${random_date}</arg>
@@ -509,80 +509,80 @@ priority: Medium</msg>
 <arg>crimeType=${random_crime}</arg>
 <arg>priority=${random_priority}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-12T23:09:26.821343" elapsed="0.000637"/>
+<status status="PASS" start="2025-05-12T23:28:37.951379" elapsed="0.000849"/>
 </kw>
 <kw name="Log Dictionary" owner="Collections">
-<msg time="2025-05-12T23:09:26.822470" level="INFO">Dictionary size is 5 and it contains following items:
-bookingDate: 1981-01-10
-crimeType: Assault
-facility: Riverbend Hub
-name: John Nguyen
+<msg time="2025-05-12T23:28:37.952597" level="INFO">Dictionary size is 5 and it contains following items:
+bookingDate: 1975-03-09
+crimeType: Misdemeanor
+facility: Valley Annex
+name: Nicholas Hood
 priority: Urgent</msg>
 <arg>${random_booking}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<status status="PASS" start="2025-05-12T23:09:26.822178" elapsed="0.000369"/>
+<status status="PASS" start="2025-05-12T23:28:37.952452" elapsed="0.000193"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:26.823180" level="INFO">${random_booking} = {'name': 'John Nguyen', 'bookingDate': '1981-01-10', 'facility': 'Riverbend Hub', 'crimeType': 'Assault', 'priority': 'Urgent'}</msg>
+<msg time="2025-05-12T23:28:37.952952" level="INFO">${random_booking} = {'name': 'Nicholas Hood', 'bookingDate': '1975-03-09', 'facility': 'Valley Annex', 'crimeType': 'Misdemeanor', 'priority': 'Urgent'}</msg>
 <arg>${random_booking}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:26.822819" elapsed="0.000431"/>
+<status status="PASS" start="2025-05-12T23:28:37.952761" elapsed="0.000237"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:26.816838" elapsed="0.006594"/>
+<status status="PASS" start="2025-05-12T23:28:37.948078" elapsed="0.004987"/>
 </kw>
 <kw name="Send Valid Booking Request" owner="keywords">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:28.995300" level="INFO">POST Request : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:39.995317" level="INFO">POST Request : url=http://localhost:5000/inmates 
  path_url=/inmates 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '127', 'Content-Type': 'application/json'} 
- body=b'{"name": "John Nguyen", "bookingDate": "1981-01-10", "facility": "Riverbend Hub", "crimeType": "Assault", "priority": "Urgent"}' 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '132', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Nicholas Hood", "bookingDate": "1975-03-09", "facility": "Valley Annex", "crimeType": "Misdemeanor", "priority": "Urgent"}' 
  </msg>
-<msg time="2025-05-12T23:09:28.995963" level="INFO">POST Response : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:39.995497" level="INFO">POST Response : url=http://localhost:5000/inmates 
  status=201, reason=CREATED 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:09:28 GMT', 'Content-Type': 'application/json', 'Content-Length': '163', 'Connection': 'close'} 
- body={"bookingDate":"1981-01-10","crimeType":"Assault","facility":"Riverbend Hub","id":"0efaca22-3d5f-44ed-9998-503e14aba156","name":"John Nguyen","priority":"Urgent"}
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:28:39 GMT', 'Content-Type': 'application/json', 'Content-Length': '168', 'Connection': 'close'} 
+ body={"bookingDate":"1975-03-09","crimeType":"Misdemeanor","facility":"Valley Annex","id":"29585192-3c2d-4b0d-8d92-64dd6242101c","name":"Nicholas Hood","priority":"Urgent"}
  
  </msg>
-<msg time="2025-05-12T23:09:28.996194" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2025-05-12T23:28:39.995703" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <var>${response}</var>
 <arg>jail_mock_api</arg>
 <arg>/inmates</arg>
 <arg>json=${random_booking}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-12T23:09:26.948190" elapsed="2.048055"/>
+<status status="PASS" start="2025-05-12T23:28:37.953868" elapsed="2.041878"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:28.997339" level="INFO">Status Code: 201</msg>
+<msg time="2025-05-12T23:28:39.996820" level="INFO">Status Code: 201</msg>
 <arg>Status Code: ${response.status_code}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:28.996509" elapsed="0.000922"/>
+<status status="PASS" start="2025-05-12T23:28:39.996016" elapsed="0.000898"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:28.998618" level="INFO">Response Body: {'bookingDate': '1981-01-10', 'crimeType': 'Assault', 'facility': 'Riverbend Hub', 'id': '0efaca22-3d5f-44ed-9998-503e14aba156', 'name': 'John Nguyen', 'priority': 'Urgent'}</msg>
+<msg time="2025-05-12T23:28:39.997875" level="INFO">Response Body: {'bookingDate': '1975-03-09', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '29585192-3c2d-4b0d-8d92-64dd6242101c', 'name': 'Nicholas Hood', 'priority': 'Urgent'}</msg>
 <arg>Response Body: ${response.json()}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:28.997693" elapsed="0.001013"/>
+<status status="PASS" start="2025-05-12T23:28:39.997151" elapsed="0.000796"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:28.999544" level="INFO">${response_body} = {'bookingDate': '1981-01-10', 'crimeType': 'Assault', 'facility': 'Riverbend Hub', 'id': '0efaca22-3d5f-44ed-9998-503e14aba156', 'name': 'John Nguyen', 'priority': 'Urgent'}</msg>
+<msg time="2025-05-12T23:28:39.998863" level="INFO">${response_body} = {'bookingDate': '1975-03-09', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '29585192-3c2d-4b0d-8d92-64dd6242101c', 'name': 'Nicholas Hood', 'priority': 'Urgent'}</msg>
 <var>${response_body}</var>
 <arg>${response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-12T23:09:28.998909" elapsed="0.000674"/>
+<status status="PASS" start="2025-05-12T23:28:39.998125" elapsed="0.000788"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:28.999985" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2025-05-12T23:28:39.999519" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:28.999756" elapsed="0.000285"/>
+<status status="PASS" start="2025-05-12T23:28:39.999137" elapsed="0.000501"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:29.000609" level="INFO">${response_body} = {'bookingDate': '1981-01-10', 'crimeType': 'Assault', 'facility': 'Riverbend Hub', 'id': '0efaca22-3d5f-44ed-9998-503e14aba156', 'name': 'John Nguyen', 'priority': 'Urgent'}</msg>
+<msg time="2025-05-12T23:28:40.000183" level="INFO">${response_body} = {'bookingDate': '1975-03-09', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '29585192-3c2d-4b0d-8d92-64dd6242101c', 'name': 'Nicholas Hood', 'priority': 'Urgent'}</msg>
 <arg>${response_body}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-05-12T23:09:29.000305" elapsed="0.000393"/>
+<status status="PASS" start="2025-05-12T23:28:39.999945" elapsed="0.000289"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:26.947710" elapsed="2.053084"/>
+<status status="PASS" start="2025-05-12T23:28:37.953519" elapsed="2.046803"/>
 </kw>
 <kw name="Validate POST All Fields Response" owner="keywords">
 <kw name="Should Contain" owner="BuiltIn">
@@ -594,149 +594,150 @@ priority: Urgent</msg>
 <arg>priority</arg>
 <arg>id</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" start="2025-05-12T23:09:29.001394" elapsed="0.000675"/>
+<status status="PASS" start="2025-05-12T23:28:40.001087" elapsed="0.000999"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:29.002340" level="INFO">All Required Fields Validated Successfully</msg>
+<msg time="2025-05-12T23:28:40.002507" level="INFO">All Required Fields Validated Successfully</msg>
 <arg>All Required Fields Validated Successfully</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:29.002254" elapsed="0.000119"/>
+<status status="PASS" start="2025-05-12T23:28:40.002390" elapsed="0.000168"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:29.001122" elapsed="0.001295"/>
+<status status="PASS" start="2025-05-12T23:28:40.000733" elapsed="0.001888"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:26.816000" elapsed="2.186591"/>
+<status status="PASS" start="2025-05-12T23:28:37.946943" elapsed="2.055931"/>
 </test>
 <test id="s1-t5" name="1.5 Delete Inmate Booking Successfully" line="34">
 <kw name="List All Inmate Bookings" owner="keywords">
 <kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:31.032560" level="INFO">GET Request : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:42.045116" level="INFO">GET Request : url=http://localhost:5000/inmates 
  path_url=/inmates 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
  body=None 
  </msg>
-<msg time="2025-05-12T23:09:31.032818" level="INFO">GET Response : url=http://localhost:5000/inmates 
+<msg time="2025-05-12T23:28:42.045276" level="INFO">GET Response : url=http://localhost:5000/inmates 
  status=200, reason=OK 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:09:31 GMT', 'Content-Type': 'application/json', 'Content-Length': '3111', 'Connection': 'close'} 
- body=[{"bookingDate":"2013-09-19","crimeType":"Assault","facility":"Create List","id":"4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3","name":"Matthew Young","priority":"High"},{"bookingDate":"2014-07-30","crimeType":"Misdemeanor","facility":"Valley Annex","id":"4047e267-1f0a-47b0-b5b1-6c7e95cd1230","name":"Troy James","priority":"Medium"},{"bookingDate":"1989-11-06","crimeType":"Assault","facility":"Crestview Labs","id":"4f4ede9f-a1eb-4ee7-9686-f9e147b6d0ce","name":"Yolanda Walton","priority":"High"},{"bookingDate":"1995-02-05","crimeType":"Theft","facility":"Crestview Labs","id":"d3c23a9d-6815-4e82-8632-c52968aa0ec9","name":"Mrs. Katelyn Clark","priority":"High"},{"bookingDate":"2023-02-24","crimeType":"Felony","facility":"Valley Annex","id":"cb7fadef-5016-494d-acae-e139e39b88ea","name":"Test User 342","priority":"Urgent"},{"bookingDate":"2023-09-08","crimeType":"Theft","facility":"Crestview Labs","id":"cb03f170-c37b-4222-9046-cddeea0a2e71","name":"Test User 223","priority":"High"},{"bookingDate":"2024-01-30","crimeType":"Murder","facility":"Summit Center","id":"bcc0a6b5-9042-493c-9362-14deece20700","name":"Test User 951","priority":"High"},{"bookingDate":"2024-08-15","crimeType":"Theft","facility":"Crestview Labs","id":"b8a1ce01-af4e-40b8-bdc8-c5771d422c7a","name":"Test User 529","priority":"Medium"},{"bookingDate":"2024-01-22","crimeType":"Misdemeanor","facility":"Summit Center","id":"66069b8c-ab5c-4153-ae40-c060c32e157a","name":"Test User 72","priority":"Low"},{"bookingDate":"2024-06-22","crimeType":"Theft","facility":"Summit Center","id":"1c7b0560-293f-43f3-86c2-cf2cb3856b11","name":"Test User 815","priority":"High"},{"bookingDate":"2023-06-08","crimeType":"Vandalism","facility":"Oakwood Depot","id":"95184d0e-4c6d-4f46-bb66-16cf25e39d60","name":"Test User 190","priority":"Low"},{"bookingDate":"2023-11-09","crimeType":"Misdemeanor","facility":"Riverbend Hub","id":"cc7daa92-da2e-439a-9b0f-9bad74e4f1c8","name":"Test User 697","priority":"High"},{"bookingDate":"2024-03-18","crimeType":"Murder","facility":"Oakwood Depot","id":"ad6f0e54-8392-4d08-8698-2e4f89a419c7","name":"Test User 340","priority":"High"},{"bookingDate":"2024-03-21","crimeType":"Assault","facility":"Summit Center","id":"41d063a5-cc62-4ce1-bee6-71b529f1a9e3","name":"Test User 38","priority":"High"},{"bookingDate":"2025-01-26","crimeType":"Theft","facility":"Oakwood Depot","id":"c216052a-c479-4436-a327-c5f90f815aa4","name":"Test User 983","priority":"Medium"},{"bookingDate":"2023-08-09","crimeType":"Murder","facility":"Valley Annex","id":"886dde67-9fbf-4fbf-863a-3395bcb7f4ed","name":"Test User 458","priority":"Routine"},{"bookingDate":"1983-09-19","crimeType":"Assault","facility":"Crestview Labs","id":"0eb9b975-e83b-45e0-9c4f-c44e45ec7f60","name":"Joyce Williams","priority":"Routine"},{"bookingDate":"1977-04-07","crimeType":"Theft","facility":"Oakwood Depot","id":"49058291-ae40-4af5-9ef8-1851c79b535e","name":"Erin Lawson","priority":"Medium"},{"bookingDate":"1981-01-10","crimeType":"Assault","facility":"Riverbend Hub","id":"0efaca22-3d5f-44ed-9998-503e14aba156","name":"John Nguyen","priority":"Urgent"}]
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:28:42 GMT', 'Content-Type': 'application/json', 'Content-Length': '1979', 'Connection': 'close'} 
+ body=[{"bookingDate":"2024-10-07","crimeType":"Murder","facility":"Valley Annex","id":"be2ca1a1-0792-4708-993b-804ddd4f6cbd","name":"Test User 604","priority":"Medium"},{"bookingDate":"2023-04-15","crimeType":"Vandalism","facility":"Riverbend Hub","id":"cbd4efa4-74a5-4d39-8c8c-2e0783f93c81","name":"Test User 392","priority":"Medium"},{"bookingDate":"2023-12-05","crimeType":"Felony","facility":"Oakwood Depot","id":"c29f9dd6-f695-47b3-b5eb-8d0eba8f09f2","name":"Test User 471","priority":"Routine"},{"bookingDate":"2023-03-26","crimeType":"Misdemeanor","facility":"Valley Annex","id":"4324da69-8183-493e-920d-0e35c79811b9","name":"Test User 365","priority":"Medium"},{"bookingDate":"2024-01-03","crimeType":"Misdemeanor","facility":"Valley Annex","id":"8faf90b6-69ef-4694-92c2-f55471bff504","name":"Test User 726","priority":"High"},{"bookingDate":"2023-08-25","crimeType":"Theft","facility":"Riverbend Hub","id":"57028c55-0852-4266-9c16-e6c1642f30dd","name":"Test User 280","priority":"Low"},{"bookingDate":"2024-11-15","crimeType":"Felony","facility":"Valley Annex","id":"f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35","name":"Test User 156","priority":"High"},{"bookingDate":"2025-03-12","crimeType":"Assault","facility":"Valley Annex","id":"02447ee3-3226-4168-9f20-74b3cddcf1de","name":"Test User 777","priority":"Medium"},{"bookingDate":"2023-01-19","crimeType":"Felony","facility":"Oakwood Depot","id":"d5bbf163-9cc9-4801-ad11-7760e6fd3fa5","name":"Test User 176","priority":"High"},{"bookingDate":"1988-08-07","crimeType":"Misdemeanor","facility":"Summit Center","id":"4d087611-27f2-4997-8ce7-92982ec5116d","name":"Anita Robinson","priority":"Urgent"},{"bookingDate":"1972-05-10","crimeType":"Assault","facility":"Summit Center","id":"8a40d14a-e798-429a-a219-7687e4341a9c","name":"Tiffany Cantu","priority":"High"},{"bookingDate":"1975-03-09","crimeType":"Misdemeanor","facility":"Valley Annex","id":"29585192-3c2d-4b0d-8d92-64dd6242101c","name":"Nicholas Hood","priority":"Urgent"}]
  
  </msg>
-<msg time="2025-05-12T23:09:31.033081" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2025-05-12T23:28:42.045646" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>jail_mock_api</arg>
 <arg>/inmates</arg>
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-12T23:09:29.003486" elapsed="2.029648"/>
+<status status="PASS" start="2025-05-12T23:28:40.006617" elapsed="2.039074"/>
 </kw>
 <kw name="Convert To String" owner="BuiltIn">
-<msg time="2025-05-12T23:09:31.034703" level="INFO">${body} = [{'bookingDate': '2013-09-19', 'crimeType': 'Assault', 'facility': 'Create List', 'id': '4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', 'name': 'Matthew Young', 'priority': 'High'}, {'bookingDate': '2014-07-3...</msg>
+<msg time="2025-05-12T23:28:42.047090" level="INFO">${body} = [{'bookingDate': '2024-10-07', 'crimeType': 'Murder', 'facility': 'Valley Annex', 'id': 'be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'name': 'Test User 604', 'priority': 'Medium'}, {'bookingDate': '2023-04...</msg>
 <var>${body}</var>
 <arg>${response.json()}</arg>
 <doc>Converts the given item to a Unicode string.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.033405" elapsed="0.001368"/>
+<status status="PASS" start="2025-05-12T23:28:42.046027" elapsed="0.001122"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:31.035291" level="INFO">All Inmate Booking As String: [{'bookingDate': '2013-09-19', 'crimeType': 'Assault', 'facility': 'Create List', 'id': '4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', 'name': 'Matthew Young', 'priority': 'High'}, {'bookingDate': '2014-07-30', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '4047e267-1f0a-47b0-b5b1-6c7e95cd1230', 'name': 'Troy James', 'priority': 'Medium'}, {'bookingDate': '1989-11-06', 'crimeType': 'Assault', 'facility': 'Crestview Labs', 'id': '4f4ede9f-a1eb-4ee7-9686-f9e147b6d0ce', 'name': 'Yolanda Walton', 'priority': 'High'}, {'bookingDate': '1995-02-05', 'crimeType': 'Theft', 'facility': 'Crestview Labs', 'id': 'd3c23a9d-6815-4e82-8632-c52968aa0ec9', 'name': 'Mrs. Katelyn Clark', 'priority': 'High'}, {'bookingDate': '2023-02-24', 'crimeType': 'Felony', 'facility': 'Valley Annex', 'id': 'cb7fadef-5016-494d-acae-e139e39b88ea', 'name': 'Test User 342', 'priority': 'Urgent'}, {'bookingDate': '2023-09-08', 'crimeType': 'Theft', 'facility': 'Crestview Labs', 'id': 'cb03f170-c37b-4222-9046-cddeea0a2e71', 'name': 'Test User 223', 'priority': 'High'}, {'bookingDate': '2024-01-30', 'crimeType': 'Murder', 'facility': 'Summit Center', 'id': 'bcc0a6b5-9042-493c-9362-14deece20700', 'name': 'Test User 951', 'priority': 'High'}, {'bookingDate': '2024-08-15', 'crimeType': 'Theft', 'facility': 'Crestview Labs', 'id': 'b8a1ce01-af4e-40b8-bdc8-c5771d422c7a', 'name': 'Test User 529', 'priority': 'Medium'}, {'bookingDate': '2024-01-22', 'crimeType': 'Misdemeanor', 'facility': 'Summit Center', 'id': '66069b8c-ab5c-4153-ae40-c060c32e157a', 'name': 'Test User 72', 'priority': 'Low'}, {'bookingDate': '2024-06-22', 'crimeType': 'Theft', 'facility': 'Summit Center', 'id': '1c7b0560-293f-43f3-86c2-cf2cb3856b11', 'name': 'Test User 815', 'priority': 'High'}, {'bookingDate': '2023-06-08', 'crimeType': 'Vandalism', 'facility': 'Oakwood Depot', 'id': '95184d0e-4c6d-4f46-bb66-16cf25e39d60', 'name': 'Test User 190', 'priority': 'Low'}, {'bookingDate': '2023-11-09', 'crimeType': 'Misdemeanor', 'facility': 'Riverbend Hub', 'id': 'cc7daa92-da2e-439a-9b0f-9bad74e4f1c8', 'name': 'Test User 697', 'priority': 'High'}, {'bookingDate': '2024-03-18', 'crimeType': 'Murder', 'facility': 'Oakwood Depot', 'id': 'ad6f0e54-8392-4d08-8698-2e4f89a419c7', 'name': 'Test User 340', 'priority': 'High'}, {'bookingDate': '2024-03-21', 'crimeType': 'Assault', 'facility': 'Summit Center', 'id': '41d063a5-cc62-4ce1-bee6-71b529f1a9e3', 'name': 'Test User 38', 'priority': 'High'}, {'bookingDate': '2025-01-26', 'crimeType': 'Theft', 'facility': 'Oakwood Depot', 'id': 'c216052a-c479-4436-a327-c5f90f815aa4', 'name': 'Test User 983', 'priority': 'Medium'}, {'bookingDate': '2023-08-09', 'crimeType': 'Murder', 'facility': 'Valley Annex', 'id': '886dde67-9fbf-4fbf-863a-3395bcb7f4ed', 'name': 'Test User 458', 'priority': 'Routine'}, {'bookingDate': '1983-09-19', 'crimeType': 'Assault', 'facility': 'Crestview Labs', 'id': '0eb9b975-e83b-45e0-9c4f-c44e45ec7f60', 'name': 'Joyce Williams', 'priority': 'Routine'}, {'bookingDate': '1977-04-07', 'crimeType': 'Theft', 'facility': 'Oakwood Depot', 'id': '49058291-ae40-4af5-9ef8-1851c79b535e', 'name': 'Erin Lawson', 'priority': 'Medium'}, {'bookingDate': '1981-01-10', 'crimeType': 'Assault', 'facility': 'Riverbend Hub', 'id': '0efaca22-3d5f-44ed-9998-503e14aba156', 'name': 'John Nguyen', 'priority': 'Urgent'}]</msg>
+<msg time="2025-05-12T23:28:42.047695" level="INFO">All Inmate Booking As String: [{'bookingDate': '2024-10-07', 'crimeType': 'Murder', 'facility': 'Valley Annex', 'id': 'be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'name': 'Test User 604', 'priority': 'Medium'}, {'bookingDate': '2023-04-15', 'crimeType': 'Vandalism', 'facility': 'Riverbend Hub', 'id': 'cbd4efa4-74a5-4d39-8c8c-2e0783f93c81', 'name': 'Test User 392', 'priority': 'Medium'}, {'bookingDate': '2023-12-05', 'crimeType': 'Felony', 'facility': 'Oakwood Depot', 'id': 'c29f9dd6-f695-47b3-b5eb-8d0eba8f09f2', 'name': 'Test User 471', 'priority': 'Routine'}, {'bookingDate': '2023-03-26', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '4324da69-8183-493e-920d-0e35c79811b9', 'name': 'Test User 365', 'priority': 'Medium'}, {'bookingDate': '2024-01-03', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '8faf90b6-69ef-4694-92c2-f55471bff504', 'name': 'Test User 726', 'priority': 'High'}, {'bookingDate': '2023-08-25', 'crimeType': 'Theft', 'facility': 'Riverbend Hub', 'id': '57028c55-0852-4266-9c16-e6c1642f30dd', 'name': 'Test User 280', 'priority': 'Low'}, {'bookingDate': '2024-11-15', 'crimeType': 'Felony', 'facility': 'Valley Annex', 'id': 'f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35', 'name': 'Test User 156', 'priority': 'High'}, {'bookingDate': '2025-03-12', 'crimeType': 'Assault', 'facility': 'Valley Annex', 'id': '02447ee3-3226-4168-9f20-74b3cddcf1de', 'name': 'Test User 777', 'priority': 'Medium'}, {'bookingDate': '2023-01-19', 'crimeType': 'Felony', 'facility': 'Oakwood Depot', 'id': 'd5bbf163-9cc9-4801-ad11-7760e6fd3fa5', 'name': 'Test User 176', 'priority': 'High'}, {'bookingDate': '1988-08-07', 'crimeType': 'Misdemeanor', 'facility': 'Summit Center', 'id': '4d087611-27f2-4997-8ce7-92982ec5116d', 'name': 'Anita Robinson', 'priority': 'Urgent'}, {'bookingDate': '1972-05-10', 'crimeType': 'Assault', 'facility': 'Summit Center', 'id': '8a40d14a-e798-429a-a219-7687e4341a9c', 'name': 'Tiffany Cantu', 'priority': 'High'}, {'bookingDate': '1975-03-09', 'crimeType': 'Misdemeanor', 'facility': 'Valley Annex', 'id': '29585192-3c2d-4b0d-8d92-64dd6242101c', 'name': 'Nicholas Hood', 'priority': 'Urgent'}]</msg>
 <arg>All Inmate Booking As String: ${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.035038" elapsed="0.000605"/>
+<status status="PASS" start="2025-05-12T23:28:42.047412" elapsed="0.000385"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:31.036298" level="INFO">${body} = [{'bookingDate': '2013-09-19', 'crimeType': 'Assault', 'facility': 'Create List', 'id': '4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', 'name': 'Matthew Young', 'priority': 'High'}, {'bookingDate': '2014-07-3...</msg>
+<msg time="2025-05-12T23:28:42.048278" level="INFO">${body} = [{'bookingDate': '2024-10-07', 'crimeType': 'Murder', 'facility': 'Valley Annex', 'id': 'be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'name': 'Test User 604', 'priority': 'Medium'}, {'bookingDate': '2023-04...</msg>
 <arg>${body}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.035966" elapsed="0.000461"/>
+<status status="PASS" start="2025-05-12T23:28:42.048024" elapsed="0.000317"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:29.003322" elapsed="2.033243"/>
+<status status="PASS" start="2025-05-12T23:28:40.006209" elapsed="2.042231"/>
 </kw>
 <kw name="Choose Random Inmate Booking" owner="keywords">
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-05-12T23:09:31.038712" level="INFO">${bookings} = ['4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', '4047e267-1f0a-47b0-b5b1-6c7e95cd1230', '4f4ede9f-a1eb-4ee7-9686-f9e147b6d0ce', 'd3c23a9d-6815-4e82-8632-c52968aa0ec9', 'cb7fadef-5016-494d-acae-e139e39b88ea',...</msg>
+<msg time="2025-05-12T23:28:42.050687" level="INFO">${bookings} = ['be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'cbd4efa4-74a5-4d39-8c8c-2e0783f93c81', 'c29f9dd6-f695-47b3-b5eb-8d0eba8f09f2', '4324da69-8183-493e-920d-0e35c79811b9', '8faf90b6-69ef-4694-92c2-f55471bff504',...</msg>
 <var>${bookings}</var>
 <arg>[booking["id"] for booking in ${body}]</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.037548" elapsed="0.001213"/>
+<status status="PASS" start="2025-05-12T23:28:42.049550" elapsed="0.001202"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:31.039105" level="INFO">Available Booking IDs: ['4a06f5cf-aff0-4f53-b5bb-5b0cba9b81b3', '4047e267-1f0a-47b0-b5b1-6c7e95cd1230', '4f4ede9f-a1eb-4ee7-9686-f9e147b6d0ce', 'd3c23a9d-6815-4e82-8632-c52968aa0ec9', 'cb7fadef-5016-494d-acae-e139e39b88ea', 'cb03f170-c37b-4222-9046-cddeea0a2e71', 'bcc0a6b5-9042-493c-9362-14deece20700', 'b8a1ce01-af4e-40b8-bdc8-c5771d422c7a', '66069b8c-ab5c-4153-ae40-c060c32e157a', '1c7b0560-293f-43f3-86c2-cf2cb3856b11', '95184d0e-4c6d-4f46-bb66-16cf25e39d60', 'cc7daa92-da2e-439a-9b0f-9bad74e4f1c8', 'ad6f0e54-8392-4d08-8698-2e4f89a419c7', '41d063a5-cc62-4ce1-bee6-71b529f1a9e3', 'c216052a-c479-4436-a327-c5f90f815aa4', '886dde67-9fbf-4fbf-863a-3395bcb7f4ed', '0eb9b975-e83b-45e0-9c4f-c44e45ec7f60', '49058291-ae40-4af5-9ef8-1851c79b535e', '0efaca22-3d5f-44ed-9998-503e14aba156']</msg>
+<msg time="2025-05-12T23:28:42.051176" level="INFO">Available Booking IDs: ['be2ca1a1-0792-4708-993b-804ddd4f6cbd', 'cbd4efa4-74a5-4d39-8c8c-2e0783f93c81', 'c29f9dd6-f695-47b3-b5eb-8d0eba8f09f2', '4324da69-8183-493e-920d-0e35c79811b9', '8faf90b6-69ef-4694-92c2-f55471bff504', '57028c55-0852-4266-9c16-e6c1642f30dd', 'f82a4c35-0ac5-4f1f-b2bb-a2a0b4fb4c35', '02447ee3-3226-4168-9f20-74b3cddcf1de', 'd5bbf163-9cc9-4801-ad11-7760e6fd3fa5', '4d087611-27f2-4997-8ce7-92982ec5116d', '8a40d14a-e798-429a-a219-7687e4341a9c', '29585192-3c2d-4b0d-8d92-64dd6242101c']</msg>
 <arg>Available Booking IDs: ${bookings}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.038923" elapsed="0.000246"/>
+<status status="PASS" start="2025-05-12T23:28:42.050945" elapsed="0.000386"/>
 </kw>
 <kw name="Random Element" owner="FakerLibrary">
-<msg time="2025-05-12T23:09:31.040560" level="INFO">${chosen_booking} = bcc0a6b5-9042-493c-9362-14deece20700</msg>
+<msg time="2025-05-12T23:28:42.052771" level="INFO">${chosen_booking} = 8a40d14a-e798-429a-a219-7687e4341a9c</msg>
 <var>${chosen_booking}</var>
 <arg>${bookings}</arg>
 <doc>Generate a randomly sampled object from ``elements``.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.039300" elapsed="0.001304"/>
+<status status="PASS" start="2025-05-12T23:28:42.051523" elapsed="0.001290"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:31.040934" level="INFO">Chosen Inmate Booking ID: bcc0a6b5-9042-493c-9362-14deece20700</msg>
+<msg time="2025-05-12T23:28:42.053593" level="INFO">Chosen Inmate Booking ID: 8a40d14a-e798-429a-a219-7687e4341a9c</msg>
 <arg>Chosen Inmate Booking ID: ${chosen_booking}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.040760" elapsed="0.000226"/>
+<status status="PASS" start="2025-05-12T23:28:42.053353" elapsed="0.000315"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2025-05-12T23:09:31.041298" level="INFO">${chosen_booking} = bcc0a6b5-9042-493c-9362-14deece20700</msg>
+<msg time="2025-05-12T23:28:42.054167" level="INFO">${chosen_booking} = 8a40d14a-e798-429a-a219-7687e4341a9c</msg>
 <arg>${chosen_booking}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.041120" elapsed="0.000222"/>
+<status status="PASS" start="2025-05-12T23:28:42.053841" elapsed="0.000409"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:31.037084" elapsed="0.004320"/>
+<status status="PASS" start="2025-05-12T23:28:42.048960" elapsed="0.005387"/>
 </kw>
 <kw name="Delete Inmate Booking" owner="keywords">
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2025-05-12T23:09:33.097556" level="INFO">DELETE Request : url=http://localhost:5000/inmates/bcc0a6b5-9042-493c-9362-14deece20700 
- path_url=/inmates/bcc0a6b5-9042-493c-9362-14deece20700 
+<msg time="2025-05-12T23:28:44.108724" level="INFO">DELETE Request : url=http://localhost:5000/inmates/8a40d14a-e798-429a-a219-7687e4341a9c 
+ path_url=/inmates/8a40d14a-e798-429a-a219-7687e4341a9c 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2025-05-12T23:09:33.097675" level="INFO">DELETE Response : url=http://localhost:5000/inmates/bcc0a6b5-9042-493c-9362-14deece20700 
- status=204, reason=NO CONTENT 
- headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:09:33 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Connection': 'close'} 
- body=None 
+<msg time="2025-05-12T23:28:44.108894" level="INFO">DELETE Response : url=http://localhost:5000/inmates/8a40d14a-e798-429a-a219-7687e4341a9c 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.3', 'Date': 'Tue, 13 May 2025 02:28:44 GMT', 'Content-Type': 'application/json', 'Content-Length': '42', 'Connection': 'close'} 
+ body={"message":"Inmate deleted successfully"}
+ 
  </msg>
-<msg time="2025-05-12T23:09:33.097883" level="INFO">${response} = &lt;Response [204]&gt;</msg>
+<msg time="2025-05-12T23:28:44.109141" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>jail_mock_api</arg>
 <arg>/inmates/${chosen_booking}</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-12T23:09:31.041997" elapsed="2.055987"/>
+<status status="PASS" start="2025-05-12T23:28:42.075435" elapsed="2.033754"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-05-12T23:09:33.099050" level="INFO">Argument types are:
+<msg time="2025-05-12T23:28:44.110382" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
+<msg time="2025-05-12T23:28:44.110610" level="FAIL">200 != 204</msg>
 <arg>${response.status_code}</arg>
 <arg>204</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-05-12T23:09:33.098254" elapsed="0.000902"/>
+<status status="FAIL" start="2025-05-12T23:28:44.109468" elapsed="0.001279">200 != 204</status>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T23:09:33.099472" level="INFO">Deletion Of Random Booking Completed</msg>
 <arg>Deletion Of Random Booking Completed</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T23:09:33.099340" elapsed="0.000185"/>
+<status status="NOT RUN" start="2025-05-12T23:28:44.111002" elapsed="0.000168"/>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:31.041717" elapsed="2.057893"/>
+<status status="FAIL" start="2025-05-12T23:28:42.074983" elapsed="2.036383">200 != 204</status>
 </kw>
-<status status="PASS" start="2025-05-12T23:09:29.002955" elapsed="4.098226"/>
+<status status="FAIL" start="2025-05-12T23:28:40.005517" elapsed="4.107114">200 != 204</status>
 </test>
 <kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
-<msg time="2025-05-12T23:09:33.102477" level="INFO">Deleting All Sessions</msg>
+<msg time="2025-05-12T23:28:44.114313" level="INFO">Deleting All Sessions</msg>
 <doc>Removes all the session objects</doc>
-<status status="PASS" start="2025-05-12T23:09:33.102326" elapsed="0.000231"/>
+<status status="PASS" start="2025-05-12T23:28:44.114159" elapsed="0.000360"/>
 </kw>
 <doc>This file contains the test cases for the present mini-project.</doc>
-<status status="FAIL" start="2025-05-12T23:09:15.819412" elapsed="17.283185"/>
+<status status="FAIL" start="2025-05-12T23:28:26.985655" elapsed="17.128944"/>
 </suite>
 <statistics>
 <total>
-<stat pass="3" fail="2" skip="0">All Tests</stat>
+<stat pass="2" fail="3" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="1.Positive Tests" id="s1" pass="3" fail="2" skip="0">1.Positive Tests</stat>
+<stat name="1.Positive Tests" id="s1" pass="2" fail="3" skip="0">1.Positive Tests</stat>
 </suite>
 </statistics>
 <errors>
