@@ -51,7 +51,7 @@ The API will be available at: `http://localhost:5000`
 }
 ```
 
-- **Success Response**: Full inmate object including generated `id` (`201 Created`)
+- **Success Response**: Full inmate object including generated `id` (`201 CREATED`)
 - **Failure**:
   - Missing required field (`400 Bad Request`)
   - Unexpected error (`500 Internal Server Error`)

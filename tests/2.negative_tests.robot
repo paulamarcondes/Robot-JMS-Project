@@ -11,7 +11,7 @@ Suite Teardown   Delete All Sessions
 
 *** Test Cases ***
 2.1 Handle Missing Required Fields in Booking Request
-    Generate Random Booking Data
+    Generate Random Data
     Send Invalid Booking Request
     Validate POST Error Response
 

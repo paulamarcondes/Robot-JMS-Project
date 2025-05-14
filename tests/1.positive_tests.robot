@@ -11,23 +11,24 @@ Suite Teardown   Delete All Sessions
 
 *** Test Cases ***
 1.1 Validate Successful Booking Response
-    Generate Random Booking Data
+    Generate Random Data
     Send Valid Booking Request
     Validate POST Successful Response
 
 1.2 Verify Inmate By Booking ID Returns Correct Data
     List All Inmate Bookings
     Choose Random Inmate Booking
-    Validate GET Successful Response
+    Get Random Inmate Booking
+    Confirm Return Of Correct Data
 
 1.3 Confirm Booking Sync With RMS
-    Generate Random Booking Data
+    Generate Random Data
     Send Valid Booking Request
     Retrieve Booking ID From Request
     Compare Booking Record With RMS
 
 1.4 Validate All Required Fields From Booking Response
-    Generate Random Booking Data
+    Generate Random Data
     Send Valid Booking Request
     Validate POST All Fields Response
 
