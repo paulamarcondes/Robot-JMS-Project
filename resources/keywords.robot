@@ -11,7 +11,7 @@ Resource         variables.robot
 
 *** Keywords ***
 Create Session On Mock Server
-    Create Session    mock_api    http://localhost:5000
+    Create Session    mock_api    ${BASE_URL}
     Log    Session Created Successfully On Mock Server
 
 
@@ -32,34 +32,36 @@ Generate Random Data
     ...    priority=${random_priority}
     
     Log Dictionary    ${random_data}
-    Set Test Variable    ${random_data}
+    RETURN    ${random_data}
 
 Create New Inmate Booking
-    Generate Random Data
+    ${random_data}=    Generate Random Data
     ${response}=    POST On Session    mock_api    /inmates    json=${random_data}
     Should Be Equal As Integers    ${response.status_code}    201
     Should Be Equal    ${response.reason}    CREATED
+    Should Contain    ${response.json()}    name
     Log    New Inmate Booking Information JSON (Python): ${response.json()}
     ${response_body}=    Convert To Dictionary    ${response.json()}
     Log    New Inmate Booking Information (Robot): ${response_body}
-    Set Test Variable    ${response_body}
+    RETURN    ${response_body}
 
 List Specific Inmate Booking
-    Create New Inmate Booking
+    ${response_body}=    Create New Inmate Booking
     ${inmate_id}=    Get From Dictionary    ${response_body}    id
     ${response}=    GET On Session    mock_api    /inmates/${inmate_id}
     Should Be Equal As Integers    ${response.status_code}    200
     Should Be Equal    ${response.reason}    OK
+    Should Be Equal As Strings    ${response.json()["id"]}     ${inmate_id}
     Log    Specific Inmate Booking Information: ${response.json()}
 
 Update Existing Inmate Booking
-    Create New Inmate Booking
+    ${response_body}=    Create New Inmate Booking
     Log    Inmate Booking Before Update: ${response_body}
     ${inmate_id}=    Get From Dictionary    ${response_body}    id
-    Generate Random Data
-    ${response}=    PUT On Session    mock_api    /inmates/${inmate_id}    json=${random_data}
-    Should Be Equal As Integers    ${response.status_code}    200
+    ${data}    Generate Random Data
+    ${response}=    PUT On Session    mock_api    /inmates/${inmate_id}    json=${data}    expected_status=200
     Should Be Equal    ${response.reason}    OK
+
     ${response_body}=    Convert To Dictionary    ${response.json()}
     Log    Inmate Booking After Update: ${response_body}
 
@@ -71,7 +73,8 @@ Update Existing Inmate Booking
 
 ### --- Positive Tests Keywords --- ###
 Send Valid Booking Request
-    ${response}=    POST On Session    mock_api    /inmates    json=${random_data}    
+    ${data}    Generate Random Data
+    ${response}=    POST On Session    mock_api    /inmates    json=${data}  
     Log    Status Code: ${response.status_code}
     Log    Response Body: ${response.json()}
     ${response_body}=    Set Variable    ${response.json()}
@@ -146,10 +149,11 @@ Delete Inmate Booking
 
 ### --- Negative Tests Keywords --- ###
 Send Invalid Booking Request
-    Remove From Dictionary    ${random_data}    name
-    Log    ${random_data}
+    ${data}    Generate Random Data
+    Remove From Dictionary    ${data}    name
+    Log    ${data}
     ${response}=    Run Keyword And Expect Error    HTTPError: 400 Client Error: BAD REQUEST*
-    ...    POST On Session    mock_api    /inmates    json=${random_data}
+    ...    POST On Session    mock_api    /inmates    json=${data}
     Set Suite Variable    ${response}
 
 Validate POST Error Response
@@ -202,8 +206,9 @@ Validate GET Error Response
 
 ### --- Server Tests Keywords --- ###
 Send Booking Request And Verify Error
+    ${data}    Generate Random Data
     ${response}=    Run Keyword And Continue On Failure
-    ...    POST On Session    mock_api    /inmates    json=${random_data}
+    ...    POST On Session    mock_api    /inmates    json=${data}
     
     Run Keyword If    '${response}' != 'None'    
     ...    Log    Server responded to booking attempt: ${response.text}
@@ -220,6 +225,7 @@ Confirm If Booking Was Saved Or Log Server Down
     ...    Log    Server unreachable, cannot confirm if booking was saved
 
 Validate Booking Saved
+    ${data}    Generate Random Data
     [Arguments]    ${response}
     ${bookings}=    Evaluate    ${response.json()}    json
-    Should Contain    ${bookings}    ${random_data}
+    Should Contain    ${bookings}    ${data}
