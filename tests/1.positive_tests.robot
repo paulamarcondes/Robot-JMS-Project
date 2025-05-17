@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    This file contains the test cases for the present mini-project.
+Documentation     This file contains end-to-end tests validating the successful flow of creating, retrieving, updating, and deleting inmate records.
 
 Resource         ../resources/keywords.robot
 Resource         ../resources/variables.robot
@@ -10,29 +10,19 @@ Suite Teardown   Delete All Sessions
 
 
 *** Test Cases ***
-1.1 Validate Successful Booking Response
-    Generate Random Data
-    Send Valid Booking Request
-    Validate POST Successful Response
+1.1 Create New Inmate Booking Successfully
+    Generate Random Inmate Data
+    Send Valid Booking Request And Verify Success
+    Store Created Inmate Data
 
-1.2 Verify Inmate By Booking ID Returns Correct Data
-    List All Inmate Bookings
-    Choose Random Inmate Booking
-    Get Random Inmate Booking
-    Confirm Return Of Correct Data
+1.2 Get Created Inmate By ID
+    Get Inmate Using Stored ID
+    Verify Retrieved Inmate Matches Original Data
 
-1.3 Confirm Booking Sync With RMS
-    Generate Random Data
-    Send Valid Booking Request
-    Retrieve Booking ID From Request
-    Compare Booking Record With RMS
+1.3 Update Inmate Priority Successfully
+    Prepare Valid Priority Update
+    Send Update Request And Confirm Success
 
-1.4 Validate All Required Fields From Booking Response
-    Generate Random Data
-    Send Valid Booking Request
-    Validate POST All Fields Response
-
-1.5 Delete Inmate Booking Successfully
-    List All Inmate Bookings
-    Choose Random Inmate Booking
-    Delete Inmate Booking
+1.4 Delete Inmate And Confirm Deletion
+    Delete Inmate By Stored ID
+    Try Getting Deleted Inmate Should Return 404

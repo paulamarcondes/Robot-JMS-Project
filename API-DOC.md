@@ -1,4 +1,3 @@
-
 # Jail System Mock API
 
 This is a simple Flask-based mock server that simulates a Jail Management System interface for inmate bookings.  
@@ -51,9 +50,13 @@ The API will be available at: `http://localhost:5000`
 }
 ```
 
+> 📌 **Note:** `bookingDate` must follow the format `"YYYY-MM-DD"`.
+> Invalid formats such as `"05-04-2024"` will result in a `400 Bad Request`.
+
 - **Success Response**: Full inmate object including generated `id` (`201 CREATED`)
 - **Failure**:
-  - Missing required field (`400 Bad Request`)
+  - Missing required fields (`400 Bad Request`)
+  - Invalid date format (`400 Bad Request`)
   - Unexpected error (`500 Internal Server Error`)
 
 ---
@@ -124,6 +127,18 @@ All errors return JSON in this format:
 
 ```json
 {
+  "error": "Missing required fields: bookingDate, crimeType, ..."
+}
+```
+
+```json
+{
+  "error": "Invalid date format. Use YYYY-MM-DD."
+}
+```
+
+```json
+{
   "error": "Internal server error"
 }
 ```
@@ -132,13 +147,13 @@ All errors return JSON in this format:
 
 ## 📋 HTTP Status Codes Summary
 
-| Status Code             | Meaning                                      |
-|-------------------------|----------------------------------------------|
-| `200 OK`                | General success (GET, PUT)                   |
-| `201 Created`           | Inmate successfully created                  |
-| `204 No Content`        | Inmate successfully deleted                  |
-| `400 Bad Request`       | Missing or invalid request data              |
-| `404 Not Found`         | Inmate with specified ID does not exist      |
-| `500 Internal Server Error` | An unexpected server-side error occurred |
+| Status Code                 | Meaning                                      |
+|----------------------------|----------------------------------------------|
+| `200 OK`                   | General success (GET, PUT)                   |
+| `201 Created`              | Inmate successfully created                  |
+| `204 No Content`           | Inmate successfully deleted                  |
+| `400 Bad Request`          | Missing or invalid request data              |
+| `404 Not Found`            | Inmate with specified ID does not exist      |
+| `500 Internal Server Error`| An unexpected server-side error occurred     |
 
 ---

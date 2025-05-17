@@ -2,6 +2,7 @@
 
 from flask import Flask, request, jsonify
 from data_store import inmates_db
+from datetime import datetime
 import uuid
 
 app = Flask(__name__)
@@ -14,9 +15,17 @@ def handle_exception(e):
     return jsonify(error="Internal server error"), 500
 
 def validate_fields(data):
+    # Verifica campos obrigatórios
     missing = [field for field in REQUIRED_FIELDS if field not in data]
     if missing:
         return jsonify(error=f"Missing required fields: {', '.join(missing)}"), 400
+
+    # Valida formato da data
+    try:
+        datetime.strptime(data["bookingDate"], "%Y-%m-%d")
+    except ValueError:
+        return jsonify(error="Invalid date format. Use YYYY-MM-DD."), 400
+
     return None
 
 @app.route('/inmates', methods=['POST'])

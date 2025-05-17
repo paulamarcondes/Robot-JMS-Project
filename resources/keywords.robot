@@ -11,13 +11,13 @@ Resource         variables.robot
 
 *** Keywords ***
 Create Session On Mock Server
-    Create Session    mock_api    ${BASE_URL}
+    Create Session    jail_api    ${BASE_URL}
     Log    Session Created Successfully On Mock Server
 
 
 
 ### --- Basic Tests Keywords --- ###
-Generate Random Data
+Generate Random Inmate Data
     ${random_name}=        Name
     ${random_date}=        Date    pattern='%Y-%m-%d'
     ${random_facility}=    Random Element    ${FACILITIES}
@@ -31,39 +31,84 @@ Generate Random Data
     ...    crimeType=${random_crime}
     ...    priority=${random_priority}
     
-    Log Dictionary    ${random_data}
+    Set Suite Variable    ${random_data}
     RETURN    ${random_data}
 
-Create New Inmate Booking
-    ${random_data}=    Generate Random Data
-    ${response}=    POST On Session    mock_api    /inmates    json=${random_data}
-    Should Be Equal As Integers    ${response.status_code}    201
-    Should Be Equal    ${response.reason}    CREATED
-    Should Contain    ${response.json()}    name
-    Log    New Inmate Booking Information JSON (Python): ${response.json()}
-    ${response_body}=    Convert To Dictionary    ${response.json()}
-    Log    New Inmate Booking Information (Robot): ${response_body}
-    RETURN    ${response_body}
 
-List Specific Inmate Booking
-    ${response_body}=    Create New Inmate Booking
-    ${inmate_id}=    Get From Dictionary    ${response_body}    id
-    ${response}=    GET On Session    mock_api    /inmates/${inmate_id}
+
+Check API Is Up and Running
+    ${response}=    GET On Session    jail_api    /inmates
     Should Be Equal As Integers    ${response.status_code}    200
-    Should Be Equal    ${response.reason}    OK
-    Should Be Equal As Strings    ${response.json()["id"]}     ${inmate_id}
-    Log    Specific Inmate Booking Information: ${response.json()}
+    Log    API is up and returned ${response.status_code}.
 
-Update Existing Inmate Booking
-    ${response_body}=    Create New Inmate Booking
-    Log    Inmate Booking Before Update: ${response_body}
-    ${inmate_id}=    Get From Dictionary    ${response_body}    id
-    ${data}    Generate Random Data
-    ${response}=    PUT On Session    mock_api    /inmates/${inmate_id}    json=${data}    expected_status=200
-    Should Be Equal    ${response.reason}    OK
+List All Inmates Should Return 200
+    ${response}=    GET On Session    jail_api    /inmates
+    Should Be Equal As Integers    ${response.status_code}    200
+    Log    List response: ${response.json()}.
 
-    ${response_body}=    Convert To Dictionary    ${response.json()}
-    Log    Inmate Booking After Update: ${response_body}
+Create Inmate With Valid Data Should Return 201
+    ${data}=    Generate Random Inmate Data
+    ${response}=    POST On Session    jail_api    /inmates    json=${data}
+    Should Be Equal As Integers    ${response.status_code}    201
+    Set Suite Variable    ${created_inmate}    ${response.json()}
+    Log    Inmate created: ${created_inmate}.
+
+Get Specific Inmate By ID Should Return 200
+    ${id}=    Set Variable    ${created_inmate["id"]}
+    ${response}=    GET On Session    jail_api    /inmates/${id}
+    Should Be Equal As Integers    ${response.status_code}    200
+    Log    Retrieved inmate: ${response.json()}.
+
+Update Inmate With Valid Data Should Return 200
+    ${id}=    Set Variable    ${created_inmate["id"]}
+    ${update}=    Create Dictionary    priority=Urgent
+    ${response}=    PUT On Session    jail_api    /inmates/${id}    json=${update}
+    Should Be Equal As Integers    ${response.status_code}    200
+    Log    Inmate updated: ${response.json()}.
+
+Delete Inmate Should Return 204
+    ${id}=    Set Variable    ${created_inmate["id"]}
+    ${response}=    DELETE On Session    jail_api    /inmates/${id}
+    Should Be Equal As Integers    ${response.status_code}    204
+    Log    Inmate deleted: ${id}.
+
+Try Creating Inmate With Missing Fields Should Return 400
+    ${invalid}=    Create Dictionary    name=Only Name
+    ${result}=    Run Keyword And Ignore Error    
+    ...    POST On Session    jail_api    /inmates    json=${invalid}
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Should Be Equal    ${status}    FAIL
+    Should Contain    ${response}    400
+    Log    Request failed with 400 as expected.
+
+Try Getting Inmate With Invalid ID Should Return 404
+    ${result}=    Run Keyword And Ignore Error    
+    ...    GET On Session    jail_api    /inmates/fake123
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Should Be Equal    ${status}    FAIL
+    Should Contain    ${response}    404
+    Log    GET request failed with 404 as expected.
+
+Try Updating Nonexistent Inmate Should Return 404
+    &{update}=    Create Dictionary    crimeType=Theft
+    ${result}=    Run Keyword And Ignore Error    
+    ...    PUT On Session    jail_api    /inmates/fake123    json=${update}
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Should Be Equal    ${status}    FAIL
+    Should Contain    ${response}    404
+    Log    Update failed with 404 as expected.
+
+Try Deleting Nonexistent Inmate Should Return 404
+    ${result}=    Run Keyword And Ignore Error    
+    ...    DELETE On Session    jail_api    /inmates/fake123
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Should Be Equal    ${status}    FAIL
+    Should Contain    ${response}    404
+    Log    Delete failed with 404 as expected.
 
 
 
@@ -72,74 +117,56 @@ Update Existing Inmate Booking
 
 
 ### --- Positive Tests Keywords --- ###
-Send Valid Booking Request
-    ${data}    Generate Random Data
-    ${response}=    POST On Session    mock_api    /inmates    json=${data}  
-    Log    Status Code: ${response.status_code}
-    Log    Response Body: ${response.json()}
-    ${response_body}=    Set Variable    ${response.json()}
-    Set Suite Variable    ${response}
-    Set Suite Variable    ${response_body}
-
-Validate POST Successful Response
+Send Valid Booking Request And Verify Success
+    ${response}=    POST On Session    jail_api    /inmates    json=${random_data}
     Should Be Equal As Integers    ${response.status_code}    201
-    Should Be Equal    ${response.reason}    CREATED
-    Should Contain    ${response.json()}    id
-    Log    Validation Completed. Inmate Information: ${response.json()}
+    ${created}=    Convert To Dictionary    ${response.json()}
+    Set Suite Variable    ${created_inmate}    ${created}
+    Log Dictionary    ${created}
 
-List All Inmate Bookings
-    ${response}=    GET On Session    mock_api    /inmates
+Store Created Inmate Data
+    ${id}=    Set Variable    ${created_inmate["id"]}
+    Set Suite Variable    ${created_id}    ${id}
+    Log    Stored inmate ID: ${created_id}.
+
+Get Inmate Using Stored ID
+    ${response}=    GET On Session    jail_api    /inmates/${created_id}
     Should Be Equal As Integers    ${response.status_code}    200
-    Should Be Equal    ${response.reason}    OK
+    ${retrieved}=    Convert To Dictionary    ${response.json()}
+    Set Suite Variable    ${retrieved_inmate}    ${retrieved}
+    Log Dictionary    ${retrieved}
 
-    ${all_inmates}=    Set Variable    ${response.json()}
-    Log    All Inmate Bookings: ${all_inmates}
-    Set Test Variable    ${all_inmates}
+Verify Retrieved Inmate Matches Original Data
+    Should Be Equal    ${retrieved_inmate["name"]}        ${random_data["name"]}
+    Should Be Equal    ${retrieved_inmate["facility"]}    ${random_data["facility"]}
+    Should Be Equal    ${retrieved_inmate["crimeType"]}   ${random_data["crimeType"]}
+    Should Be Equal    ${retrieved_inmate["priority"]}    ${random_data["priority"]}
+    Log    Inmate data successfully verified.
 
-Choose Random Inmate Booking
-    ${chosen_inmate}=    Random Element    ${all_inmates}
-    ${chosen_id}=    Get From Dictionary    ${chosen_inmate}    id
-    Log    Chosen Inmate Booking ID: ${chosen_id}
-    Set Test Variable    ${chosen_id}
+Prepare Valid Priority Update
+    &{update_payload}=    Create Dictionary    priority=Urgent
+    Set Suite Variable    ${update_payload}
+    Log Dictionary    ${update_payload}
 
-Get Random Inmate Booking
-    ${response}=    GET On Session    mock_api    /inmates/${chosen_id}
+Send Update Request And Confirm Success
+    ${response}=    PUT On Session    jail_api    /inmates/${created_id}    json=${update_payload}
     Should Be Equal As Integers    ${response.status_code}    200
-    Log    Random Inmate Booking Chosen: ${response.json()}
-    ${random_inmate}=    Set Variable    ${response.json()}
-    Set Test Variable    ${random_inmate}
+    Should Be Equal    ${response.json()["priority"]}    Urgent
+    Log    Inmate priority updated successfully.
 
-Confirm Return Of Correct Data
-    Should Be Equal    ${random_inmate["id"]}    ${chosen_id}
-    Log    Validation Completed. Inmate Information: ${random_inmate}
-
-Retrieve Booking ID From Request
-    ${booking_id}=    Get From Dictionary    ${response_body}    id
-    Log    Booking Record ID: ${booking_id}
-    Set Test Variable    ${booking_id}
-
-Compare Booking Record With RMS
-    ${response}=    GET On Session    mock_api    /inmates/${booking_id}
-    Log    Booking Data: ${response.json()}
-    Should Contain    ${response.text}    ${booking_id}
-    Log    Booking ID ${booking_id} found in response: ${response.json()}
-
-Validate POST All Fields Response
-    Should Contain    ${response.json()}    
-    ...    name    
-    ...    bookingDate    
-    ...    facility    
-    ...    crimeType    
-    ...    priority    
-    ...    id
-    Log    All Required Fields Validated Successfully
-
-Delete Inmate Booking
-    List All Inmate Bookings
-    Choose Random Inmate Booking
-    ${response}=    DELETE On Session    mock_api    /inmates/${chosen_id}
+Delete Inmate By Stored ID
+    ${response}=    DELETE On Session    jail_api    /inmates/${created_id}
     Should Be Equal As Integers    ${response.status_code}    204
-    Log    Deletion Of Random Booking Completed
+    Log    Inmate deleted successfully.
+
+Try Getting Deleted Inmate Should Return 404
+    ${result}=    Run Keyword And Ignore Error    
+    ...    GET On Session    jail_api    /inmates/${created_id}
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Should Be Equal    ${status}    FAIL
+    Should Contain    ${response}    404
+    Log    Inmate not found after deletion, as expected.
 
 
 
@@ -148,55 +175,60 @@ Delete Inmate Booking
 
 
 ### --- Negative Tests Keywords --- ###
-Send Invalid Booking Request
-    ${data}    Generate Random Data
-    Remove From Dictionary    ${data}    name
-    Log    ${data}
-    ${response}=    Run Keyword And Expect Error    HTTPError: 400 Client Error: BAD REQUEST*
-    ...    POST On Session    mock_api    /inmates    json=${data}
-    Set Suite Variable    ${response}
+Generate Incomplete Inmate Data
+    &{incomplete_data}=    Create Dictionary    name=Only Name
+    Set Suite Variable    ${invalid_data}    ${incomplete_data}
+    Log Dictionary    ${invalid_data}
 
-Validate POST Error Response
+Generate Inmate With Invalid Date Format
+    Generate Random Inmate Data
+    Set To Dictionary    ${random_data}    bookingDate=2024
+    Set Suite Variable    ${invalid_data}    ${random_data}
+    Log Dictionary    ${invalid_data}
+
+Send Invalid Booking Request And Expect 400
+    ${result}=    Run Keyword And Ignore Error    
+    ...    POST On Session    jail_api    /inmates    json=${invalid_data}
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Should Be Equal    ${status}    FAIL
     Should Contain    ${response}    400
-    Should Contain    ${response}    BAD REQUEST
-    Log    POST Error Response Validation Completed
+    Log    Booking failed with 400 as expected.
 
-Choose Random Inmate Name
-    ${inmates}=    Evaluate    [["name"] for booking in ${all_inmates}]
-    Log    Available Inmate Names: ${inmates}
-    ${chosen_inmate}=    Random Element    ${inmates}
-    Log    Chosen Inmate Name: ${chosen_inmate}
-    Set Test Variable    ${chosen_inmate}
-
-Post New Booking With Same Name
-    &{duplicate_inmate}=    Create Dictionary    
-    ...    name=${chosen_inmate}    
-    ...    bookingDate=2024-04-05    
-    ...    facility= County Jail A    
-    ...    crimeType= Misdemeanor    
-    ...    priority=Medium
-    Log    Booking with Duplicate Name: ${duplicate_inmate}
-
-    ${response}=    POST On Session    mock_api    /inmates    json=${duplicate_inmate}
-    Log    New Booking With Same Name Successful: ${response.json()}
-    Set Test Variable    ${response}
-
-Generate Invalid ID Number
-    ${invalid_id}=    Random Number    digits=10
-    Log    Invalid ID number: ${invalid_id}
-    Set Test Variable    ${invalid_id}
-
-Get Inmate By Invalid ID
-    ${response}=    Run Keyword And Expect Error    HTTPError: 404 Client Error: NOT FOUND*
-    ...    GET On Session    mock_api    /inmates/${invalid_id}
-    Log    Expected Error: ${response}
-    Set Test Variable    ${response}
-
-Validate GET Error Response
+Request Inmate Using Invalid ID
+    ${result}=    Run Keyword And Ignore Error    
+    ...    GET On Session    jail_api    /inmates/@@@wrongID
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Set Suite Variable    ${invalid_response}    ${response}
+    Should Be Equal    ${status}    FAIL
     Should Contain    ${response}    404
-    Should Contain    ${response}    NOT FOUND
-    Log    GET Error Response Validation Completed
+    Log    GET failed with 404 as expected.
 
+Try Updating Inmate With Invalid ID
+    &{update}=    Create Dictionary    facility=Nowhere
+    ${result}=    Run Keyword And Ignore Error    
+    ...    PUT On Session    jail_api    /inmates/fake999    json=${update}
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Set Suite Variable    ${invalid_response}    ${response}
+    Should Be Equal    ${status}    FAIL
+    Should Contain    ${response}    404
+    Log    PUT failed with 404 as expected.
+
+Try Deleting Inmate With Invalid ID
+    ${result}=    Run Keyword And Ignore Error    
+    ...    DELETE On Session    jail_api    /inmates/fake999
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Set Suite Variable    ${invalid_response}    ${response}
+    Should Be Equal    ${status}    FAIL
+    Should Contain    ${response}    404
+    Log    DELETE failed with 404 as expected.
+
+Verify Response Is 404 Not Found
+    Should Contain    ${invalid_response}    404
+    Log    Response contained 404 as expected.
 
 
 
@@ -205,27 +237,37 @@ Validate GET Error Response
 
 
 ### --- Server Tests Keywords --- ###
-Send Booking Request And Verify Error
-    ${data}    Generate Random Data
-    ${response}=    Run Keyword And Continue On Failure
-    ...    POST On Session    mock_api    /inmates    json=${data}
-    
-    Run Keyword If    '${response}' != 'None'    
-    ...    Log    Server responded to booking attempt: ${response.text}
-    ...    ELSE
-    ...    Log    Server unreachable during booking attempt
+Simulate Server Down
+    [Documentation]    Manually stop the Flask server before running this test.
+    Log    Ensure the server is OFF before running this test.
 
-Confirm If Booking Was Saved Or Log Server Down
-    ${response}=    Run Keyword And Continue On Failure
-    ...    GET On Session    mock_api    /inmates
-    
-    Run Keyword If    '${response}' != 'None'
-    ...    Validate Booking Saved    ${response}
-    ...    ELSE
-    ...    Log    Server unreachable, cannot confirm if booking was saved
+Try Creating Inmate Booking
+    Generate Random Inmate Data
+    Send Create Request
 
-Validate Booking Saved
-    ${data}    Generate Random Data
-    [Arguments]    ${response}
-    ${bookings}=    Evaluate    ${response.json()}    json
-    Should Contain    ${bookings}    ${data}
+Send Create Request
+    ${result}=    Run Keyword And Ignore Error    
+    ...    POST On Session    jail_api    /inmates    json=${random_data}
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Set Suite Variable    ${server_response}=    ${response}
+    Log    POST Request Result: ${status}.
+
+Try Getting Inmate By ID
+    ${id}=    Set Variable    fake-id-123
+    Send Get Request    ${id}
+
+Send Get Request
+    [Arguments]    ${id}
+    ${result}=    Run Keyword And Ignore Error    
+    ...    GET On Session    jail_api    /inmates/${id}
+    ${status}=    Set Variable    ${result[0]}
+    ${response}=  Set Variable    ${result[1]}
+    Set Suite Variable    ${server_response}    ${response}
+    Log    GET Request Result: ${status}.
+
+Verify Connection Error Or Status 500
+    Run Keyword If    'ConnectionError' in '''${server_response}'''    
+    ...    Log    Connection failed as expected.
+    ...    ELSE    Should Be Equal As Integers    ${server_response.status_code}    500
+    Log    API returned: ${server_response}
