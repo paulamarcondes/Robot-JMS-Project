@@ -1,5 +1,6 @@
 *** Settings ***
-Documentation    This file contains all the custom keywords for the present mini-project.
+Documentation    Custom keywords for API testing using Robot Framework.
+...              Organized by test type. No logic in test cases, all keywords are here.
 Library          RequestsLibrary
 Library          Collections
 Library          FakerLibrary
@@ -39,25 +40,27 @@ Generate Random Inmate Data
 Check API Is Up and Running
     ${response}=    GET On Session    jail_api    /inmates
     Should Be Equal As Integers    ${response.status_code}    200
-    Log    API is up and returned ${response.status_code}.
+    Log    API health check returned status code: ${response.status_code}.
 
 List All Inmates Should Return 200
     ${response}=    GET On Session    jail_api    /inmates
     Should Be Equal As Integers    ${response.status_code}    200
-    Log    List response: ${response.json()}.
+    ${list}=    Convert To Dictionary    ${response.json()}
+    Log Dictionary    ${list}
 
 Create Inmate With Valid Data Should Return 201
     ${data}=    Generate Random Inmate Data
     ${response}=    POST On Session    jail_api    /inmates    json=${data}
     Should Be Equal As Integers    ${response.status_code}    201
     Set Suite Variable    ${created_inmate}    ${response.json()}
-    Log    Inmate created: ${created_inmate}.
+    Log Dictionary    ${created_inmate}
 
 Get Specific Inmate By ID Should Return 200
     ${id}=    Set Variable    ${created_inmate["id"]}
     ${response}=    GET On Session    jail_api    /inmates/${id}
     Should Be Equal As Integers    ${response.status_code}    200
-    Log    Retrieved inmate: ${response.json()}.
+    ${retrieved}=    Convert To Dictionary    ${response.json()}
+    Log Dictionary    ${retrieved}
 
 Update Inmate With Valid Data Should Return 200
     ${id}=    Set Variable    ${created_inmate["id"]}
@@ -70,45 +73,40 @@ Delete Inmate Should Return 204
     ${id}=    Set Variable    ${created_inmate["id"]}
     ${response}=    DELETE On Session    jail_api    /inmates/${id}
     Should Be Equal As Integers    ${response.status_code}    204
-    Log    Inmate deleted: ${id}.
+    Log    Deleted inmate with ID: ${id}.
 
 Try Creating Inmate With Missing Fields Should Return 400
     ${invalid}=    Create Dictionary    name=Only Name
     ${result}=    Run Keyword And Ignore Error    
     ...    POST On Session    jail_api    /inmates    json=${invalid}
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
+    Validate Failure Response    ${result}    400    Request failed with 400 as expected.
+
+
+Validate Failure Response
+    [Arguments]    ${result}    ${expected_code}    ${log_message}
+    ${status}=     Set Variable    ${result[0]}
+    ${response}=   Set Variable    ${result[1]}
+    Set Suite Variable    ${invalid_response}    ${response}
     Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    400
-    Log    Request failed with 400 as expected.
+    Should Contain    ${response}    ${expected_code}
+    Log    ${log_message}
+
 
 Try Getting Inmate With Invalid ID Should Return 404
     ${result}=    Run Keyword And Ignore Error    
     ...    GET On Session    jail_api    /inmates/fake123
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
-    Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    404
-    Log    GET request failed with 404 as expected.
+    Validate Failure Response    ${result}    404    GET request failed with 404 as expected.
 
 Try Updating Nonexistent Inmate Should Return 404
     &{update}=    Create Dictionary    crimeType=Theft
     ${result}=    Run Keyword And Ignore Error    
     ...    PUT On Session    jail_api    /inmates/fake123    json=${update}
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
-    Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    404
-    Log    Update failed with 404 as expected.
+    Validate Failure Response    ${result}    404    Update failed with 404 as expected.
 
 Try Deleting Nonexistent Inmate Should Return 404
     ${result}=    Run Keyword And Ignore Error    
     ...    DELETE On Session    jail_api    /inmates/fake123
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
-    Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    404
-    Log    Delete failed with 404 as expected.
+    Validate Failure Response    ${result}    404    Delete failed with 404 as expected.
 
 
 
@@ -127,7 +125,7 @@ Send Valid Booking Request And Verify Success
 Store Created Inmate Data
     ${id}=    Set Variable    ${created_inmate["id"]}
     Set Suite Variable    ${created_id}    ${id}
-    Log    Stored inmate ID: ${created_id}.
+    Log    Created inmate ID stored in variable: ${created_id}
 
 Get Inmate Using Stored ID
     ${response}=    GET On Session    jail_api    /inmates/${created_id}
@@ -157,16 +155,12 @@ Send Update Request And Confirm Success
 Delete Inmate By Stored ID
     ${response}=    DELETE On Session    jail_api    /inmates/${created_id}
     Should Be Equal As Integers    ${response.status_code}    204
-    Log    Inmate deleted successfully.
+    Log    Successfully deleted inmate with ID: ${created_id}
 
 Try Getting Deleted Inmate Should Return 404
     ${result}=    Run Keyword And Ignore Error    
     ...    GET On Session    jail_api    /inmates/${created_id}
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
-    Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    404
-    Log    Inmate not found after deletion, as expected.
+    Validate Failure Response    ${result}    404    Inmate not found after deletion, as expected.
 
 
 
@@ -189,42 +183,23 @@ Generate Inmate With Invalid Date Format
 Send Invalid Booking Request And Expect 400
     ${result}=    Run Keyword And Ignore Error    
     ...    POST On Session    jail_api    /inmates    json=${invalid_data}
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
-    Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    400
-    Log    Booking failed with 400 as expected.
+    Validate Failure Response    ${result}    400    Booking failed with 400 as expected.
 
 Request Inmate Using Invalid ID
     ${result}=    Run Keyword And Ignore Error    
     ...    GET On Session    jail_api    /inmates/@@@wrongID
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
-    Set Suite Variable    ${invalid_response}    ${response}
-    Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    404
-    Log    GET failed with 404 as expected.
+    Validate Failure Response    ${result}    404    GET failed with 404 as expected.
 
 Try Updating Inmate With Invalid ID
     &{update}=    Create Dictionary    facility=Nowhere
     ${result}=    Run Keyword And Ignore Error    
     ...    PUT On Session    jail_api    /inmates/fake999    json=${update}
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
-    Set Suite Variable    ${invalid_response}    ${response}
-    Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    404
-    Log    PUT failed with 404 as expected.
+    Validate Failure Response    ${result}    404    PUT failed with 404 as expected.
 
 Try Deleting Inmate With Invalid ID
     ${result}=    Run Keyword And Ignore Error    
     ...    DELETE On Session    jail_api    /inmates/fake999
-    ${status}=    Set Variable    ${result[0]}
-    ${response}=  Set Variable    ${result[1]}
-    Set Suite Variable    ${invalid_response}    ${response}
-    Should Be Equal    ${status}    FAIL
-    Should Contain    ${response}    404
-    Log    DELETE failed with 404 as expected.
+    Validate Failure Response    ${result}    404    DELETE failed with 404 as expected.
 
 Verify Response Is 404 Not Found
     Should Contain    ${invalid_response}    404

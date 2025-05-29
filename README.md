@@ -51,19 +51,8 @@ robot tests/
 ## 🔍 Highlights
 
 - Clean, reusable and modular Robot Framework design
-- Full coverage of expected and unexpected behaviors
+- Coverage of expected and unexpected behaviors
 - Built-in server validation (`500`, connection errors)
 - Beginner-friendly and scalable for future extensions
-
----
-
-## 🚀 Why This Project?
-
-This mini project was designed to **demonstrate practical QA automation skills**, such as:
-
-- Validating real-world scenarios
-- Handling server errors
-- Designing readable test documentation
-- Working with custom keywords and dynamic data
 
 ---
