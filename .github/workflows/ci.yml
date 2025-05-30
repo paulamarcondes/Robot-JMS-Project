@@ -37,6 +37,7 @@ jobs:
 
       - name: Run Robot Tests (excluding server tests)
         run: |
+          mkdir -p reports
           robot -d reports \
             tests/0.basic_tests.robot \
             tests/1.positive_tests.robot \
