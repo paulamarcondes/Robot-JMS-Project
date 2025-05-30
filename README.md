@@ -1,4 +1,4 @@
-# 🛠️ Jail System API - Robot Framework Tests
+# 🛠️ JMS API - Robot Framework Tests
 
 This is a mini-project for practicing **API test automation** using [Robot Framework](https://robotframework.org/), focused on a simulated **Jail Management System**.
 
@@ -9,9 +9,10 @@ Tests are organized into basic, positive, negative, and server-failure scenarios
 ## 📦 Project Structure
 
 ```
-├── app.py                      # Mock Flask API
-├── API-DOC.md                  # Full API specification
 ├── README.md                   # This file
+├── api/
+│   ├── app.py                  # Mock Flask API
+│   └── API-DOC.md              # Full API specification
 ├── resources/
 │   ├── keywords.robot          # Reusable keywords
 │   └── variables.robot         # Test data variables
@@ -50,9 +51,8 @@ robot tests/
 
 ## 🔍 Highlights
 
-- Clean, reusable and modular Robot Framework design
+- Clean, beginner-friendly and scalable
 - Coverage of expected and unexpected behaviors
 - Built-in server validation (`500`, connection errors)
-- Beginner-friendly and scalable for future extensions
 
 ---
