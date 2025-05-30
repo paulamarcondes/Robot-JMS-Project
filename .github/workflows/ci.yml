@@ -43,9 +43,9 @@ jobs:
             tests/1.positive_tests.robot \
             tests/2.negative_tests.robot
 
-      - name: Upload Robot Reports
-        if: always()
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: robot-reports
-          path: reports/
+      # - name: Upload Robot Reports
+      #   if: always()
+      #   uses: actions/upload-artifact@v3.1.2
+      #   with:
+      #     name: robot-reports
+      #     path: reports/
