@@ -25,20 +25,30 @@ jobs:
       - name: Build Docker image for API
         run: docker build -t robot-jms:latest -f docker/Dockerfile .
 
-      - name: Run API container
+      - name: Run API container with health check
         run: |
-          docker run -d --network host --name api robot-jms:latest
+          docker run -d --network host --name api \
+            --health-cmd='curl --silent --fail localhost:5000/health || exit 1' \
+            --health-interval=10s \
+            --health-timeout=5s \
+            --health-retries=3 \
+            robot-jms:latest
 
       - name: Wait for API to be ready
         run: |
-          for i in {1..15}; do
-            if curl -s http://localhost:5000/health; then
+          for i in {1..20}; do
+            if curl --silent --fail http://localhost:5000/health; then
               echo "API is up!"
               break
             fi
             echo "Waiting for API..."
-            sleep 2
+            sleep 5
           done
+
+          if ! curl --silent --fail http://localhost:5000/health; then
+            echo "API is not ready!" >&2
+            exit 1
+          fi
 
       - name: Run Robot Tests (excluding server tests)
         run: |
@@ -50,10 +60,11 @@ jobs:
 
       - name: Upload Robot Reports
         if: always()
-        run: |
-          if [ -d "reports" ] && [ "$(ls -A reports)" ]; then
-            echo "Uploading reports..."
-            tar -czf robot-reports.tar.gz reports
-          else
-            echo "No reports to upload."
-          fi
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: robot-reports
+          path: reports/
+
+      - name: Debug API container if it fails
+        if: failure()
+        run: docker logs api
