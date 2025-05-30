@@ -44,7 +44,6 @@ jobs:
             echo "Waiting for API..."
             sleep 5
           done
-
           if ! curl --silent --fail http://localhost:5000/health; then
             echo "API is not ready!" >&2
             exit 1
@@ -58,15 +57,19 @@ jobs:
             tests/1.positive_tests.robot \
             tests/2.negative_tests.robot
 
-      # - name: Upload Robot Reports
-      #   if: always()
-      #   uses: actions/upload-artifact@v3.1.3
-      #   with:
-      #     name: robot-reports
-      #     path: reports/
+      - name: Upload Robot Reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: robot-reports
+          path: reports/
 
-      - name: List report files
-        run: ls -R reports || echo "No reports found"
+      - name: Print location of Robot reports
+        run: |
+          echo ""
+          echo "Robot reports generated at:"
+          echo "    $(pwd)/reports"
+          echo ""
 
       - name: Debug API container if it fails
         if: failure()
