@@ -68,5 +68,9 @@ def delete_inmate(id):
     del inmates_db[id]
     return '', 204  # No Content
 
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "ok"}), 200
+
 if __name__ == '__main__':
     app.run(debug=False)

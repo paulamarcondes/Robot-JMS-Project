@@ -1,58 +1,84 @@
 # 🛠️ JMS API - Robot Framework Tests
 
-This is a mini-project for practicing **API test automation** using [Robot Framework](https://robotframework.org/), focused on a simulated **Jail Management System**.
+![CI](https://github.com/paulamarcondes/RobotJMSProject/actions/workflows/ci.yml/badge.svg)
 
-Tests are organized into basic, positive, negative, and server-failure scenarios.
+This is a mini-project for practicing **API test automation** using [Robot Framework](https://robotframework.org/), focused on a simulated **Jail Management System (JMS)**.
+
+Tests are organized into basic, positive, negative, and server-failure scenarios.  
+The project uses **Docker** to run the API and **GitHub Actions** for CI/CD.
+
 
 ---
+
 
 ## 📦 Project Structure
 
-```
-├── README.md                   # This file
-├── api/
-│   ├── app.py                  # Mock Flask API
-│   └── API-DOC.md              # Full API specification
-├── resources/
-│   ├── keywords.robot          # Reusable keywords
-│   └── variables.robot         # Test data variables
-├── tests/
-│   ├── 0.basic_tests.robot     # Basic API coverage
-│   ├── 1.positive_tests.robot  # Full successful flow
-│   ├── 2.negative_tests.robot  # Invalid inputs and errors
-│   └── 3.server_tests.robot    # Tests with server offline
-```
+    ├── README.md
+    ├── requirements.txt
+    ├── .gitignore
+    ├── .github/
+    │   └── workflows/
+    │       └── ci.yml             # GitHub Actions workflow
+    ├── api/
+    │   ├── app.py                 # Mock Flask API
+    │   └── API-DOC.md             # API specification
+    ├── docker/
+    │   └── Dockerfile             # API container setup
+    ├── reports/
+    │   ├── log.html
+    │   ├── output.xml
+    │   └── report.html
+    ├── resources/
+    │   ├── keywords.robot         # Reusable keywords
+    │   └── variables.robot        # Test data variables
+    ├── tests/
+    │   ├── 0.basic_tests.robot
+    │   ├── 1.positive_tests.robot
+    │   ├── 2.negative_tests.robot
+    │   └── 3.server_tests.robot
+
 
 ---
 
-## ▶️ How to Run
+
+## ▶️ How to Run Locally
 
 1. Install dependencies:
 
-```bash
-pip install flask requests robotframework robotframework-requests robotframework-faker
-```
+    pip install flask requests robotframework robotframework-requests robotframework-faker
 
-2. Start the mock API:
 
-```bash
-python app.py
-```
+2. Start the API:
+
+    python api/app.py
+
 
 3. Run the tests:
 
-```bash
-robot tests/
-```
+    robot -d reports tests/
 
-> 🧪 To run server tests, **turn off the server** before executing `3.server_tests.robot`.
+> 🧪 To run `3.server_tests.robot`, **manually stop the API first**.
+
+
+---
+
+
+## 🔄 GitHub Actions CI
+
+Every push to `main` runs:
+
+- The mock API in Docker
+- All Robot tests (except server tests)
+- Uploads `log.html` and `report.html` as downloadable artifacts
+
+Check them in the **Actions** tab → run → "Artifacts".
+
 
 ---
 
-## 🔍 Highlights
 
-- Clean, beginner-friendly and scalable
-- Coverage of expected and unexpected behaviors
-- Built-in server validation (`500`, connection errors)
+## ✅ Highlights
 
----
+- Clean and modular test structure
+- Covers both expected and edge-case behaviors
+- Uses Flask + Docker + Robot Framework + GitHub Actions
