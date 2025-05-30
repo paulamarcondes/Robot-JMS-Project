@@ -42,11 +42,6 @@ jobs:
             tests/0.basic_tests.robot \
             tests/1.positive_tests.robot \
             tests/2.negative_tests.robot
-        
-      - name: Ensure reports directory exists
-        run: |
-          mkdir -p reports
-          touch reports/placeholder.txt
 
       - name: Upload Robot Reports
         if: always()
