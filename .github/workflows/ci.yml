@@ -43,6 +43,7 @@ jobs:
             tests/2.negative_tests.robot
         
       - name: Upload Robot Reports
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: robot-reports
