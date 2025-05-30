@@ -19,10 +19,9 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Robot Framework and libraries
+      - name: Install dependencies
         run: |
-          pip install robotframework
-          pip install robotframework-requests
+          pip install -r requirements.txt
 
       - name: Build Docker image for API
         run: docker build -t robot-jms:latest -f docker/Dockerfile .
@@ -49,7 +48,10 @@ jobs:
 
       - name: Upload Robot Reports
         if: always()
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: robot-reports
-          path: reports/
+        run: |
+          if [ -d "reports" ] && [ "$(ls -A reports)" ]; then
+            echo "Uploading reports..."
+            tar -czf robot-reports.tar.gz reports
+          else
+            echo "No reports to upload."
+          fi
