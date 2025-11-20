@@ -5,7 +5,7 @@ It supports basic CRUD operations and is intended for use in QA testing, especia
 
 ---
 
-## 🔧 Setup
+## Setup
 
 1. Install dependencies:
 
@@ -23,7 +23,7 @@ The API will be available at: `http://localhost:5000`
 
 ---
 
-## 📡 Endpoints
+## Endpoints
 
 | Method | Endpoint             | Description                          |
 |--------|----------------------|--------------------------------------|
@@ -100,7 +100,7 @@ The API will be available at: `http://localhost:5000`
 
 ---
 
-## 📦 Example Inmate Record (Response Format)
+## Example Inmate Record (Response Format)
 
 ```json
 {
@@ -115,7 +115,7 @@ The API will be available at: `http://localhost:5000`
 
 ---
 
-## 🚨 Error Responses
+## Error Responses
 
 All errors return JSON in this format:
 
@@ -145,7 +145,7 @@ All errors return JSON in this format:
 
 ---
 
-## 📋 HTTP Status Codes Summary
+## HTTP Status Codes Summary
 
 | Status Code                 | Meaning                                      |
 |----------------------------|----------------------------------------------|
