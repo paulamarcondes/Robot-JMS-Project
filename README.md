@@ -1,4 +1,4 @@
-# 🛠️ JMS API - Robot Framework
+# JMS API - Robot Framework
 
 ![GitHub Actions CI](https://github.com/paulamarcondes/Robot-JMS-Project/actions/workflows/ci.yml/badge.svg)
 
@@ -7,7 +7,7 @@ Mini-project for **API test automation** using [Robot Framework](https://robotfr
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 - `tests/`: Test cases and scenarios.
 - `resources/`: Reusable keywords and variables.
@@ -17,7 +17,7 @@ Mini-project for **API test automation** using [Robot Framework](https://robotfr
 
 ---
 
-## 🚀 Technologies
+## Technologies
 
 - Flask
 - Robot Framework
@@ -26,7 +26,7 @@ Mini-project for **API test automation** using [Robot Framework](https://robotfr
 
 ---
 
-## 📄 Test Types
+## Test Types
 
 | Type           | Description                                      |
 |----------------|--------------------------------------------------|
@@ -38,7 +38,7 @@ Mini-project for **API test automation** using [Robot Framework](https://robotfr
 ---
 
 
-## ▶️ How to run locally
+## How to run locally
 
 ### 1. Clone the repository
 
@@ -69,7 +69,7 @@ robot -d reports tests/0.basic_tests.robot tests/1.positive_tests.robot tests/2.
 ---
 
 
-## ✅ How CI Works
+## How CI Works
 
 Every push to the `main` branch:
 1. Builds and runs the Flask API inside a Docker container.
@@ -81,7 +81,7 @@ Every push to the `main` branch:
 ---
 
 
-## 📎 Notes
+## Notes
 
 - You can view logs (`log.html`) and reports (`report.html`) in the `reports/` folder after running tests locally.
 - For CI runs, logs are not uploaded as artifacts (you’ll see CLI paths only).
@@ -90,7 +90,7 @@ Every push to the `main` branch:
 ---
 
 
-## ✨ Author
+## Author
 
 Created with ❤️ by [Paula Marcondes](https://www.linkedin.com/in/paulamarcondes/)
 
